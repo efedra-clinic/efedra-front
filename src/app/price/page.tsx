@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import { Suspense } from "react";
 import PriceList from "@/components/pricePage/PriceList/PriceList";
 import VerticalTitleHero from "@/components/shared/hero/VerticalTitleHero";

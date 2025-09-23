@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import type { Metadata } from "next";
 import Advantages from "@/components/servicePage/advantages/Advantages";
 import Contraindications from "@/components/servicePage/contraindications/Contraindications";

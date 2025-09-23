@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import type { Metadata } from "next";
 import Hero from "@/components/articlePage/hero/Hero";
 import { Suspense } from "react";

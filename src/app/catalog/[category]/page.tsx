@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import Hero from "@/components/catalogCategoryPage/hero/Hero";
 import { categoriesData } from "./data";
 import ServicesList from "@/components/catalogCategoryPage/servicesLIst/ServicesList";
