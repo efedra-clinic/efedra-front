@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import Hero from "@/components/homePage/hero/Hero";
 import About from "@/components/homePage/about/About";
 import Blog from "@/components/homePage/blog/Blog";

@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import BlogList from "@/components/blogPage/blogList/BlogList";
 import Hero from "@/components/blogPage/hero/Hero";
 import Loader from "@/components/shared/loader/Loader";

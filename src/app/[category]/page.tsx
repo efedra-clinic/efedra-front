@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import Hero from "@/components/categoryPage/hero/Hero";
 import { categoriesData } from "./data";
 import MarqueeLine from "@/components/shared/marquee/MarqueeLine";
