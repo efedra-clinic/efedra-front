@@ -26,7 +26,7 @@ export default function Map() {
         exit="exit"
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeInAnimation({ x: 20, delay: 0.4 })}
-        className="relative w-[100%] -mr-[25px] md:mr-0 md:w-[100%] h-[145px] md:h-[220px] lg:h-[286px] rounded-[16px] md:rounded-[20px] overflow-hidden"
+        className="relative w-[100%] -mr-[25px] md:mr-0 md:w-[100%] h-[145px] md:h-full rounded-[16px] md:rounded-[20px] overflow-hidden"
       >
         <Image
           src="/images/contactsPage/contacts/map.webp"
