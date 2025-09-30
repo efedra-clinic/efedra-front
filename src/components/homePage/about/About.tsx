@@ -59,7 +59,7 @@ export default function About() {
             exit="exit"
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeInAnimation({ scale: 0.95, delay: 0.3 })}
-            className="relative w-full md:w-[calc(50%-84.5px)] lg:w-[calc(50%-110px)] xl:w-[calc(50%-15px)] h-[195px] xs:h-[280px] sm:h-[320px] md:h-[287px] lg:h-[330px] xl:h-[373px] overflow-hidden rounded-[20px]"
+            className="relative w-full md:w-[calc(50%-84.5px)] lg:w-[calc(50%-110px)] xl:w-[calc(50%-15px)] h-[195px] xs:h-[280px] sm:h-[320px] md:h-auto overflow-hidden rounded-[20px]"
           >
             <Image
               src="/images/shared/building.webp"
