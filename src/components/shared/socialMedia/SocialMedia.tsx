@@ -30,7 +30,7 @@ export default function SocialMedia({
           <MainButton
             variant="beige"
             className={twMerge(
-              "h-9 max-w-[144px] px-4 lg:px-4 text-[10px] font-medium",
+              "h-9 max-w-[154px] px-2 lg:px-2 text-[10px] font-medium",
               buttonClassName
             )}
           >
@@ -47,7 +47,7 @@ export default function SocialMedia({
           <MainButton
             variant={dentistryButtonVariant}
             className={twMerge(
-              "h-9 max-w-[144px] px-4 lg:px-4 text-[10px] font-medium",
+              "h-9 max-w-[154px] px-4 lg:px-4 text-[10px] font-medium",
               buttonClassName
             )}
           >

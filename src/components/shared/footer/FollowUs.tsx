@@ -7,7 +7,7 @@ export default function FollowUs() {
 
   return (
     <div>
-      <FooterSubtitle className="max-w-[144px]">{t("followUs")}</FooterSubtitle>
+      <FooterSubtitle className="max-w-[154px]">{t("followUs")}</FooterSubtitle>
       <SocialMedia />
     </div>
   );
