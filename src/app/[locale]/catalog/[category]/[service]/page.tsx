@@ -18,25 +18,31 @@ import { Suspense } from "react";
 import Recommended from "@/components/servicePage/recommended/Recommended";
 import { getDefaultMetadata } from "@/utils/getDefaultMetadata";
 import { urlFor } from "@/utils/getUrlForSanityImage";
+import { getLocalizedContent, deepLocalize } from "@/utils/getLocalizedContent";
 
 interface ServicePageProps {
-  params: Promise<{ service: string }>;
+  params: Promise<{ service: string; locale: string }>;
 }
 
 export async function generateMetadata({
   params,
 }: ServicePageProps): Promise<Metadata> {
-  const { service } = await params;
+  const { service, locale } = await params;
 
   const currentService = await fetchSanityDataServer(serviceBySlugQuery, {
     slug: service,
   });
 
+  const localizedTitle = getLocalizedContent(currentService?.title, locale);
+  const localizedDescription = getLocalizedContent(
+    currentService?.shortDescription,
+    locale
+  );
+
   return {
-    title: `${currentService?.title}` || (await getDefaultMetadata()).title,
+    title: localizedTitle || (await getDefaultMetadata()).title,
     description:
-      currentService?.shortDescription ||
-      (await getDefaultMetadata()).description,
+      localizedDescription || (await getDefaultMetadata()).description,
     openGraph: {
       images: [
         {
@@ -53,13 +59,16 @@ export async function generateMetadata({
 }
 
 export default async function ServicePpage({ params }: ServicePageProps) {
-  const { service } = await params;
+  const { service, locale } = await params;
 
   const currentService = await fetchSanityDataServer(serviceBySlugQuery, {
     slug: service,
   });
 
   if (!currentService) return null;
+
+  // Localize the service content
+  const localizedService = deepLocalize(currentService, locale);
 
   const { category } = currentService;
 
@@ -69,16 +78,16 @@ export default async function ServicePpage({ params }: ServicePageProps) {
     <>
       <Suspense fallback={<Loader />}>
         <VerticalTitleHero
-          title={currentService?.title}
+          title={localizedService?.title}
           image={urlFor(currentService?.mainImage).fit("crop").url()}
         />
         <MarqueeLine variant={variant} />
-        <Description variant={variant} service={currentService} />
-        <Recommended variant={variant} service={currentService} />
-        <HowItGoes variant={variant} service={currentService} />
-        <Advantages variant={variant} service={currentService} />
-        <Contraindications variant={variant} service={currentService} />
-        <Types variant={variant} service={currentService} />
+        <Description variant={variant} service={localizedService} />
+        <Recommended variant={variant} service={localizedService} />
+        <HowItGoes variant={variant} service={localizedService} />
+        <Advantages variant={variant} service={localizedService} />
+        <Contraindications variant={variant} service={localizedService} />
+        <Types variant={variant} service={localizedService} />
       </Suspense>
       <Cost variant={variant} />
       {category === "dentistry" ? (

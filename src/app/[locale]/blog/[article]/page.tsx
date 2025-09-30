@@ -12,24 +12,31 @@ import RecommendedPosts from "@/components/articlePage/hero/recommendedPosts/Rec
 import { Post } from "@/types/post";
 import { getDefaultMetadata } from "@/utils/getDefaultMetadata";
 import { urlFor } from "@/utils/getUrlForSanityImage";
+import { getLocalizedContent, deepLocalize } from "@/utils/getLocalizedContent";
 
 interface ArticlePageProps {
-  params: Promise<{ article: string }>;
+  params: Promise<{ article: string; locale: string }>;
 }
 
 export async function generateMetadata({
   params,
 }: ArticlePageProps): Promise<Metadata> {
-  const { article } = await params;
+  const { article, locale } = await params;
 
   const currentPost = await fetchSanityDataServer(postBySlugQuery, {
     slug: article,
   });
 
+  const localizedTitle = getLocalizedContent(currentPost?.title, locale);
+  const localizedDescription = getLocalizedContent(
+    currentPost?.description,
+    locale
+  );
+
   return {
-    title: `${currentPost?.title}` || (await getDefaultMetadata()).title,
+    title: localizedTitle || (await getDefaultMetadata()).title,
     description:
-      currentPost?.description || (await getDefaultMetadata()).description,
+      localizedDescription || (await getDefaultMetadata()).description,
     openGraph: {
       images: [
         {
@@ -46,7 +53,7 @@ export async function generateMetadata({
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
-  const { article } = await params;
+  const { article, locale } = await params;
 
   const res = await fetchSanityDataServer(postsAndPostBySlugQuery, {
     slug: article,
@@ -55,16 +62,28 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const post = res?.postBySlug;
   const allPosts = res?.allPosts;
 
-  const recommendedPosts = allPosts
+  // Localize the post content
+  const localizedPost = post
+    ? {
+        ...post,
+        title: getLocalizedContent(post.title, locale),
+        description: getLocalizedContent(post.description, locale),
+        content: getLocalizedContent(post.content, locale),
+      }
+    : null;
+
+  // Localize recommended posts
+  const localizedAllPosts = deepLocalize(allPosts || [], locale);
+  const recommendedPosts = localizedAllPosts
     ?.filter((post: Post) => post?.slug !== article)
     .slice(0, 12);
 
   return (
     <>
       <Suspense fallback={<Loader className="h-[440px] lg:h-[700px]" />}>
-        <Hero post={post} />
+        <Hero post={localizedPost} />
         <MarqueeLine />
-        <Content post={post} />
+        <Content post={localizedPost} />
         <RecommendedPosts posts={recommendedPosts} />
       </Suspense>
     </>

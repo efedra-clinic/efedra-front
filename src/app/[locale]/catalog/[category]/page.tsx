@@ -10,15 +10,16 @@ import Loader from "@/components/shared/loader/Loader";
 import { Service } from "@/types/service";
 import MeetCenterCTA from "@/components/shared/cta/MeetCenterCTA";
 import CTAFormWithBackground from "@/components/shared/cta/CTAFormWithBackground";
+import { deepLocalize } from "@/utils/getLocalizedContent";
 
 interface CatalogCategoryPageProps {
-  params: Promise<{ category: string }>;
+  params: Promise<{ category: string; locale: string }>;
 }
 
 export default async function CatalogCategoryPage({
   params,
 }: CatalogCategoryPageProps) {
-  const { category } = await params;
+  const { category, locale } = await params;
 
   const { dentistry, aesthetic } = await getCategoriesData();
 
@@ -28,7 +29,10 @@ export default async function CatalogCategoryPage({
 
   const servicesList = await fetchSanityDataServer(allServicesQuery);
 
-  const filteredServicesList = servicesList.filter(
+  // Localize the services data
+  const localizedServicesList = deepLocalize(servicesList || [], locale);
+
+  const filteredServicesList = localizedServicesList.filter(
     (doctor: Service) => doctor?.category === category
   );
 

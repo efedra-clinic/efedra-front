@@ -8,12 +8,21 @@ import Loader from "@/components/shared/loader/Loader";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
 import { getTranslations } from "next-intl/server";
+import { deepLocalize } from "@/utils/getLocalizedContent";
 
-export default async function Blog() {
+interface BlogProps {
+  locale: string;
+}
+
+export default async function Blog({ locale }: BlogProps) {
   const posts = await fetchSanityDataServer(allPostsQuery);
   const t = await getTranslations("blog");
 
-  const postsList = posts.slice(0, 3);
+  // Localize the posts content
+  const localizedPosts = deepLocalize(posts || [], locale);
+  const postsList = localizedPosts?.slice(0, 3);
+
+  if (!postsList || postsList?.length !== 3) return null;
 
   return (
     <section className="pt-15 lg:py-[95px] lg:mb-6">

@@ -9,7 +9,13 @@ import Reviews from "@/components/homePage/reviews/Reviews";
 import StartJourneyCTA from "@/components/shared/cta/StartJourneyCTA";
 import MarqueeLine from "@/components/shared/marquee/MarqueeLine";
 
-export default function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+
   return (
     <>
       <Hero />
@@ -17,7 +23,7 @@ export default function HomePage() {
       <About />
       <ChooseUs />
       <Mission />
-      <Blog />
+      <Blog locale={locale} />
       <MarqueeLine className="hidden lg:block lg:text-[26px] lg:h-[65px]" />
       <Reviews />
       <StartJourneyCTA
