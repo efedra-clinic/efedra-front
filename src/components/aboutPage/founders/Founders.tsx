@@ -81,7 +81,7 @@ export default function Founders() {
                   <MainButton
                     variant="beige"
                     withArrow
-                    className="xl:h-[56px] xl:w-[258px] xl:px-6"
+                    className="xl:h-[56px] xl:w-[268px] xl:px-6"
                   >
                     <span className="text-[14px] lg:text-[15px] font-normal">
                       {t("aestheticButton")}
@@ -114,13 +114,13 @@ export default function Founders() {
                 exit="exit"
                 viewport={{ once: true, amount: 0.3 }}
                 variants={fadeInAnimation({ x: 20 })}
-                className="flex flex-col justify-between gap-[25px] lg:gap-[48.5px] pt-7 pr-3 pb-3 pl-4 lg:pt-10 lg:pr-10 lg:pb-4 lg:pl-9 bg-gray-light rounded-[16px]"
+                className="flex flex-col justify-between gap-4 lg:gap-[48.5px] pt-7 pr-3 pb-3 pl-4 lg:pt-10 lg:pr-10 lg:pb-4 lg:pl-9 bg-gray-light rounded-[16px]"
               >
                 <p className="text-[14px] lg:text-[22px] font-evolenta leading-[136%] lg:leading-[131%] italic uppercase pr-5">
                   {t("alexey.quote")}
                 </p>
 
-                <div className="flex flex-col gap-[2px] lg:gap-[6px] w-fit max-w-[116px] lg:max-w-[137px] self-end lg:mr-5">
+                <div className="flex flex-col gap-[2px] lg:gap-[6px] w-fit max-w-[116px] lg:max-w-[157px] self-end lg:mr-5">
                   <p className="text-[12px] lg:text-[18px]  font-evolenta leading-[134%] uppercase">
                     {t("alexey.name")}
                   </p>
