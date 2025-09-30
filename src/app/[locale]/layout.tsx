@@ -5,6 +5,9 @@ import localFont from "next/font/local";
 import Header from "@/components/shared/header/Header";
 import dynamic from "next/dynamic";
 import SplashGate from "@/components/shared/splashScreen/SplashGate";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { notFound } from "next/navigation";
+import { routing } from "@/i18n/routing";
 
 const Footer = dynamic(() => import("@/components/shared/footer/Footer"), {
   ssr: true,
@@ -17,7 +20,7 @@ const montserrat = Montserrat({
 });
 
 const evolenta = localFont({
-  src: "../fonts/evolenta-regular.ttf",
+  src: "../../fonts/evolenta-regular.ttf",
   variable: "--font-evolenta",
   display: "swap",
 });
@@ -25,21 +28,31 @@ const evolenta = localFont({
 export async function generateMetadata() {
   return getDefaultMetadata();
 }
-export default function RootLayout({
+
+export default async function LocaleLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
   return (
-    <html lang="uk">
+    <html lang={locale}>
       <body
         className={`${montserrat.variable} ${evolenta.variable} flex min-h-dvh flex-col antialiased text-[14px] font-normal leading-[120%]`}
       >
-        <SplashGate>
-          <Header />
-          <main className="flex-1 pt-[86px] lg:pt-[99px]">{children}</main>
-          <Footer />
-        </SplashGate>
+        <NextIntlClientProvider>
+          <SplashGate>
+            <Header />
+            <main className="flex-1 pt-[86px] lg:pt-[99px]">{children}</main>
+            <Footer />
+          </SplashGate>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
