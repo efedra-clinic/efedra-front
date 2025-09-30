@@ -2,6 +2,7 @@ import * as motion from "motion/react-client";
 import { twMerge } from "tailwind-merge";
 import { listVariants } from "@/utils/animationVariants";
 import BenefitItem from "./BenefitItem";
+import { useTranslations } from "next-intl";
 
 interface BenefitsListProps {
   className?: string;
@@ -12,10 +13,12 @@ export default function BenefitsList({
   className = "",
   variant = "default",
 }: BenefitsListProps) {
+  const t = useTranslations("benefits");
+
   const benefitsList = [
-    { value: "10+", description: "років досвіду" },
-    { value: "100%", description: "сертифіковані фахівці" },
-    { value: "1000+", description: "задоволених відвідувачів" },
+    { value: "10+", description: t("experience") },
+    { value: "100%", description: t("certified") },
+    { value: "1000+", description: t("satisfied") },
   ];
 
   return (

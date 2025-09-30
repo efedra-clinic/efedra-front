@@ -5,12 +5,13 @@ import Container from "../container/Container";
 import LogoIcon from "../icons/LogoIcon";
 import BurgerMenu from "./burgerMenu/BurgerMenu";
 import NavMenu from "./navMenu/NavMenu";
-import { navListOne, navListTwo } from "./navMenu/navMenuData";
+import { useNavMenuData } from "./navMenu/navMenuData";
 import * as motion from "motion/react-client";
 import { headerVariants } from "@/utils/animationVariants";
 
 export default function Header() {
   const [isOpenBurgerMenu, setIsOpenBurgerMenu] = useState(false);
+  const { navListOne, navListTwo } = useNavMenuData();
 
   return (
     <motion.header

@@ -5,6 +5,7 @@ import Link from "next/link";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
 import { urlFor } from "@/utils/getUrlForSanityImage";
+import { useTranslations } from "next-intl";
 
 interface ArticleOneProps {
   post: Post;
@@ -12,6 +13,7 @@ interface ArticleOneProps {
 
 export default function ArticleOne({ post }: ArticleOneProps) {
   const { title, description, image, slug } = post;
+  const t = useTranslations("buttons");
 
   return (
     <motion.div
@@ -32,7 +34,7 @@ export default function ArticleOne({ post }: ArticleOneProps) {
               {description}
             </p>
             <SecondaryButton className="xl:w-[165px] xl:mt-7 px-5 lg:px-[22px] xl:h-14 shrink-0">
-              Читати далі
+              {t("readMore")}
             </SecondaryButton>
           </div>
           <div className="relative h-[202px] xl:h-[344px] rounded-[20px] overflow-hidden">

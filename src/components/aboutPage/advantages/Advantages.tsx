@@ -9,31 +9,30 @@ import EquipmentIcon from "@/components/shared/icons/EquipmentIcon";
 import HeartsIcon from "@/components/shared/icons/HeartsIcon";
 import DoctorIcon from "@/components/shared/icons/DoctorIcon";
 import AdvantageItem from "./AdvantageItem";
+import { useTranslations } from "next-intl";
 
 export default function Advantages() {
+  const t = useTranslations("advantages");
+
   const advantages = [
     {
-      title: "Індивідуальний підхід",
-      description:
-        "Ми уважно вислуховуємо кожного пацієнта та пропонуємо рішення, що враховують саме ваші потреби, цілі й спосіб життя.",
+      title: t("individual.title"),
+      description: t("individual.description"),
       icon: <ApproachIcon />,
     },
     {
-      title: "Новітнє обладнання",
-      description:
-        "Використовуємо сучасні технології та сертифіковане обладнання, щоб забезпечити точність, безпеку та високий результат.",
+      title: t("equipment.title"),
+      description: t("equipment.description"),
       icon: <EquipmentIcon />,
     },
     {
-      title: "Турбота про комфорт",
-      description:
-        "Створюємо спокійну, затишну атмосферу, де вам буде комфортно на кожному етапі — від консультації до завершення лікування.",
+      title: t("comfort.title"),
+      description: t("comfort.description"),
       icon: <HeartsIcon />,
     },
     {
-      title: "Досвідчені лікарі",
-      description:
-        "Наша команда — це лікарі з багаторічним досвідом, які поєднують професіоналізм із сучасним підходом.",
+      title: t("doctors.title"),
+      description: t("doctors.description"),
       icon: <DoctorIcon />,
     },
   ];
@@ -41,7 +40,7 @@ export default function Advantages() {
   return (
     <section className="pt-[60px] lg:pt-[72px]">
       <Container>
-        <SectionTitle>Наші переваги</SectionTitle>
+        <SectionTitle>{t("title")}</SectionTitle>
         <div className="flex flex-col gap-6 pt-1 justify-center items-center md:hidden">
           <motion.ul
             initial="hidden"

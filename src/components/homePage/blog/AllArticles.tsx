@@ -2,8 +2,11 @@ import Link from "next/link";
 import SecondaryButton from "@/components/shared/buttons/SecondaryButton";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
+import { useTranslations } from "next-intl";
 
 export default function AllArticles() {
+  const t = useTranslations("blog.allArticles");
+
   return (
     <motion.div
       initial="hidden"
@@ -16,18 +19,16 @@ export default function AllArticles() {
         <p className="mt-1 font-evolenta text-[32px] xl:text-[40px] font-normal leading-none uppercase">
           +200
         </p>
-        <p className="max-w-[240px] xl:max-w-[195px]">
-          статтей та корисних матеріалів в нашому блозі
-        </p>
+        <p className="max-w-[240px] xl:max-w-[195px]">{t("description")}</p>
         <Link href={`/blog`} className="hidden xl:block">
           <SecondaryButton variant="white" className="px-[15px]">
-            До всіх матеріалів
+            {t("button")}
           </SecondaryButton>
         </Link>
       </div>
       <Link href={`/blog`} className="xl:hidden">
         <SecondaryButton variant="beige" className="px-5">
-          До всіх матеріалів
+          {t("button")}
         </SecondaryButton>
       </Link>
     </motion.div>

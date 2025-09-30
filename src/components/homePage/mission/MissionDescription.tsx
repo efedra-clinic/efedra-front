@@ -1,8 +1,10 @@
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
 import MarqueeLine from "@/components/shared/marquee/MarqueeLine";
+import { useTranslations } from "next-intl";
 
 export default function MissionDescription() {
+  const t = useTranslations("mission");
   return (
     <motion.div
       initial="hidden"
@@ -14,8 +16,9 @@ export default function MissionDescription() {
     >
       <div className="sm:w-[310px] lg:w-[472px] px-[21px] lg:px-[45px] py-[33px] bg-beige rounded-[20px] shrink-0">
         <p className="font-evolenta text-[24px] lg:text-[32px] font-normal leading-[133%] uppercase text-white">
-          Ми віримо, що краса починається з{" "}
-          <span className="italic">впевненості в собі</span>
+          {t.rich("belief", {
+            italic: (chunks) => <span className="italic">{chunks}</span>
+          })}
         </p>
       </div>
       <div>
@@ -30,8 +33,7 @@ export default function MissionDescription() {
           variants={fadeInAnimation({ y: 20 })}
           className="sm:max-w-[250px] md:max-w-[330px] xl:max-w-[398px] text-[15px] font-normal leading-[120%]"
         >
-          У “Ефедрі” кожна послуга — це турбота, підтримка і місце, де ви завжди
-          — у центрі уваги.
+          {t("description")}
         </motion.p>
       </div>
     </motion.div>

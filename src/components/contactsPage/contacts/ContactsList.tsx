@@ -1,10 +1,11 @@
 import * as motion from "motion/react-client";
 
-import { leftContactItems, rightContactItems } from "./data";
+import { useContactItems } from "./data";
 import { listVariants } from "@/utils/animationVariants";
 import ContactItem from "./ContactItem";
 
 export default function ContactsList() {
+  const { leftContactItems, rightContactItems } = useContactItems();
   return (
     <div className="flex flex-col min-[360px]:flex-row gap-[15px] min-[360px]:gap-[37px] md:gap-12 lg:gap-[70px] md:w-[49%]">
       <motion.ul

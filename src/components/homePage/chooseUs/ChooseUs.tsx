@@ -4,12 +4,14 @@ import ChooseUsList from "./ChooseUsList";
 import Image from "next/image";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
+import { useTranslations } from "next-intl";
 
 export default function ChooseUs() {
+  const t = useTranslations("chooseUs");
   return (
     <section className="pt-15 lg:py-20">
       <Container>
-        <SectionTitle type="bordered">Чому обирають нас</SectionTitle>
+        <SectionTitle type="bordered">{t("title")}</SectionTitle>
         <div className="flex flex-col md:flex-row gap-5 lg:gap-6">
           <ChooseUsList />
           <motion.div
@@ -34,12 +36,10 @@ export default function ChooseUs() {
               className="-z-20 object-cover object-bottom-right"
             />
             <p className="max-w-[380px] mb-[310px] lg:mb-[363px] font-evolenta text-[24px] lg:text-[32px] font-normal leading-[120%] uppercase">
-              Ми цінуємо ваш комфорт і результат
+              {t("subtitle")}
             </p>
             <p className="max-w-[405px] text-[14px] font-light leading-[120%]">
-              У центрі нашої роботи — не лише професіоналізм, а й щира турбота.
-              Ми прагнемо, щоб кожен візит був для вас простим, спокійним і
-              ефективним.
+              {t("description")}
             </p>
           </motion.div>
         </div>

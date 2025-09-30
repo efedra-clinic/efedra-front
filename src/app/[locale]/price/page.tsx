@@ -8,14 +8,16 @@ import MarqueeLine from "@/components/shared/marquee/MarqueeLine";
 import { allPriceCategoriesQuery } from "@/lib/queries";
 import { fetchSanityDataServer } from "@/utils/fetchSanityDataServer";
 import CTAFormWithBackground from "@/components/shared/cta/CTAFormWithBackground";
+import { getTranslations } from "next-intl/server";
 
 export default async function PricePage() {
   const categories = await fetchSanityDataServer(allPriceCategoriesQuery);
+  const t = await getTranslations("price");
 
   return (
     <>
       <VerticalTitleHero
-        title="Прайс-лист"
+        title={t("title")}
         image="/images/pricePage/hero/price.webp"
       />
       <MarqueeLine variant="blue" />

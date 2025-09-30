@@ -4,6 +4,7 @@ import MainButton from "@/components/shared/buttons/MainButton";
 import CallBackModal from "@/components/shared/modals/CallBackModal";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
+import { useTranslations } from "next-intl";
 
 interface CallbackProps {
   variant: "beige" | "blue" | "bordered";
@@ -11,6 +12,7 @@ interface CallbackProps {
 
 export default function Callback({ variant }: CallbackProps) {
   const [isModalShown, setIsModalShown] = useState(false);
+  const t = useTranslations("buttons");
 
   return (
     <>
@@ -27,7 +29,7 @@ export default function Callback({ variant }: CallbackProps) {
           className="xl:h-14 mb-3 xl:mb-[15px] text-[14px] lg:text-[15px] font-normal lg:font-medium"
           withArrow
         >
-          Записатись на консультацію
+          {t("consultation")}
         </MainButton>
       </motion.div>
       <CallBackModal

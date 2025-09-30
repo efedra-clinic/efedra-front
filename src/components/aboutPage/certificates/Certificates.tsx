@@ -5,12 +5,15 @@ import { fadeInAnimation } from "@/utils/animationVariants";
 import CertificatesSlider from "./CertificatesSlider";
 import CertificateCard from "./CertificateCard";
 import { certificatesList } from "./data";
+import { useTranslations } from "next-intl";
 
 export default function Certificates() {
+  const t = useTranslations("aboutPage.certificates");
+
   return (
     <section className="pt-[60px] lg:pt-[103px]">
       <Container>
-        <SectionTitle>Сертифікати та ліцензії</SectionTitle>
+        <SectionTitle>{t("title")}</SectionTitle>
         <motion.h3
           initial="hidden"
           whileInView="visible"
@@ -19,7 +22,7 @@ export default function Certificates() {
           variants={fadeInAnimation({ x: 30 })}
           className="lg:hidden font-evolenta text-[20px] sm:text-[28px] uppercase italic leading-[135%] mb-[38px] pt-1"
         >
-          Ваше здоров’я — у надійних і сертифікованих руках
+          {t("subtitle")}
         </motion.h3>
 
         <div className="flex flex-col lg:flex-row lg:items-end lg:gap-6 lg:pt-3">
@@ -32,7 +35,7 @@ export default function Certificates() {
               variants={fadeInAnimation({ x: 30 })}
               className="font-evolenta text-[28px] xl:text-[32px] uppercase italic leading-[135%] mb-[41.65px] max-w-[560px]"
             >
-              Ваше здоров’я — у надійних і сертифікованих руках
+              {t("subtitle")}
             </motion.h3>
             <motion.div
               initial="hidden"

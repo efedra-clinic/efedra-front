@@ -4,13 +4,16 @@ import { fadeInAnimation } from "@/utils/animationVariants";
 import RateUs from "./RateUs";
 import ReviewsSlider from "./ReviewsSlider";
 import ReviewCard from "./ReviewCard";
-import { reviewsList } from "./data";
+import { useReviewsList } from "./data";
+import { useTranslations } from "next-intl";
 
 export default function Reviews() {
+  const reviewsList = useReviewsList();
+  const t = useTranslations("reviews");
   return (
     <section id="reviews" className="pt-15 lg:pt-16 lg:pb-[115px] scroll-mt-11">
       <div className="w-full px-8 lg:pr-0 lg:pl-15 xs:max-w-full sm:max-w-[640px] md:max-w-[768px] lg:max-w-full mx-auto lg:mr-0 lg:ml-[calc((100%-1024px)/2)] xl:ml-[calc((100%-1280px)/2)]">
-        <SectionTitle>Відгуки наших клієнтів</SectionTitle>
+        <SectionTitle>{t("title")}</SectionTitle>
         <motion.p
           initial="hidden"
           whileInView="visible"
@@ -19,8 +22,9 @@ export default function Reviews() {
           variants={fadeInAnimation({ x: 30 })}
           className="max-w-[544px] mb-10 lg:mb-3 font-evolenta text-[24px] lg:text-[32px] font-normal leading-[133%] uppercase text-blue"
         >
-          Вони вже довірили нам свою красу - тепер{" "}
-          <span className="italic">ваша черга</span>!
+          {t.rich("subtitle", {
+            italic: (chunks) => <span className="italic">{chunks}</span>
+          })}
         </motion.p>
         <div className="flex flex-col lg:flex-row lg:items-end gap-5 lg:gap-6">
           <motion.div

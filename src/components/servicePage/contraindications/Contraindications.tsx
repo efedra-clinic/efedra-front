@@ -6,6 +6,7 @@ import Image from "next/image";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
 import { urlFor } from "@/utils/getUrlForSanityImage";
+import { useTranslations } from "next-intl";
 
 interface ContraindicationsProps {
   service: Service;
@@ -17,6 +18,7 @@ export default function Contraindications({
   service,
 }: ContraindicationsProps) {
   const { contraindications } = service;
+  const t = useTranslations("servicePage.sections");
 
   if (!contraindications) return null;
 
@@ -29,7 +31,7 @@ export default function Contraindications({
     <section className="pt-15 lg:pt-25">
       <Container>
         <SectionTitle variant={variant} className="mb-6 lg:mb-10">
-          Протипоказання
+          {t("contraindications")}
         </SectionTitle>
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
           <motion.ul

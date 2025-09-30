@@ -5,6 +5,7 @@ import Image from "next/image";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
 import ApproachList from "./ApproachList";
+import { useTranslations } from "next-intl";
 
 interface ApproachProps {
   category: Category;
@@ -14,11 +15,12 @@ interface ApproachProps {
 export default function Approach({ category, variant }: ApproachProps) {
   const { approach } = category;
   const { imageMob: ImageMob, imageDesk: ImageDesk, imageTwo, list } = approach;
+  const t = useTranslations("approach");
 
   return (
     <section className="pt-15 lg:py-11">
       <Container>
-        <SectionTitle variant={variant}>наш підхід</SectionTitle>
+        <SectionTitle variant={variant}>{t("title")}</SectionTitle>
         <motion.p
           initial="hidden"
           whileInView="visible"
@@ -27,7 +29,7 @@ export default function Approach({ category, variant }: ApproachProps) {
           variants={fadeInAnimation({ scale: 0.9 })}
           className="max-w-[386px] mb-7 xl:mb-0 font-evolenta text-[24px] font-normal leading-[133%] uppercase italic"
         >
-          Дбаємо про вас на кожному етапі
+          {t("subtitle")}
         </motion.p>
         <div className="flex flex-col gap-8 sm:flex-row items-end">
           <div className="flex gap-3 mx-auto lg:ml-40 xl:ml-[153px] lg:mx-0 xl:-mt-4">

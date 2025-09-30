@@ -3,6 +3,7 @@ import Image from "next/image";
 import Callback from "./Callback";
 import * as motion from "motion/react-client";
 import { fadeInAnimation, ctaVariants } from "@/utils/animationVariants";
+import { useTranslations } from "next-intl";
 
 interface MeetCenterCTAProps {
   imageOne: string;
@@ -15,6 +16,7 @@ export default function MeetCenterCTA({
   imageTwo,
   className = "",
 }: MeetCenterCTAProps) {
+  const t = useTranslations("cta.meetCenter");
   return (
     <section className={`overflow-hidden ${className}`}>
       <motion.div
@@ -58,7 +60,7 @@ export default function MeetCenterCTA({
               variants={fadeInAnimation({ x: 30 })}
               className="sm:max-w-[240px] lg:max-w-[380px] mb-1.5 font-evolenta text-[18px] lg:text-[32px] font-normal leading-[133%] uppercase text-center sm:text-left"
             >
-              Бажаєте познайомитися з нашим центром особисто?
+              {t("title")}
             </motion.h2>
             <motion.div
               initial="hidden"
@@ -84,11 +86,10 @@ export default function MeetCenterCTA({
             variants={ctaVariants}
           >
             <p className="lg:max-w-[342px] mb-4 lg:mb-8 text-[14px] lg:text-[16px] font-normal leading-[120%] text-center sm:text-left">
-              Заповніть форму зворотнього звʼязку і ми обовʼязково зателефонуємо
-              Вам!
+              {t("description")}
             </p>
             <Callback
-              buttonText="Записатися на консультацію"
+              buttonText={t("submit")}
               variant="bordered"
               withArrow
               buttonClassName="lg:w-[331px] h-14 px-6 lg:px-6 text-[14px] lg:text-[16px] font-medium leading-[120%]"

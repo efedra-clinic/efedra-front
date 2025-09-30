@@ -3,10 +3,11 @@ import { Form, Formik, FormikHelpers } from "formik";
 import axios from "axios";
 import { Dispatch, SetStateAction, useState } from "react";
 
-import { callBackValidation } from "@/schemas/callBackValidation";
+import { useCallBackValidation } from "@/schemas/callBackValidation";
 
 import CustomizedInput from "../formComponents/CustomizedInput";
 import MainButton from "../buttons/MainButton";
+import { useTranslations } from "next-intl";
 
 export interface ValuesCallBackFormType {
   name: string;
@@ -29,13 +30,14 @@ export default function CallBackForm({
   buttonVariant = "blue",
 }: CallBackFormProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const t = useTranslations("forms");
 
   const initialValues = {
     name: "",
     phone: "",
   };
 
-  const validationSchema = callBackValidation();
+  const validationSchema = useCallBackValidation();
 
   const submitForm = async (
     values: ValuesCallBackFormType,
@@ -84,10 +86,10 @@ export default function CallBackForm({
       {({ dirty, isValid }) => (
         <Form className={`${className}`}>
           <div className="flex flex-col w-full gap-y-3 lg:gap-y-3.5 mb-[22px] lg:mb-[26px]">
-            <CustomizedInput fieldName="name" label="Імʼя" />
+            <CustomizedInput fieldName="name" label={t("name")} />
             <CustomizedInput
               fieldName="phone"
-              label="Телефон"
+              label={t("phone")}
               inputType="tel"
             />
           </div>
@@ -96,10 +98,10 @@ export default function CallBackForm({
             variant={buttonVariant}
             disabled={!(dirty && isValid) || isLoading}
             isLoading={isLoading}
-            loadingText="Надсилання..."
+            loadingText={t("loading")}
             className="h-14 px-5 lg:px-5 text-[14px] lg:text-[16px] font-medium"
           >
-            Записатися на консультацію
+            {t("submit")}
           </MainButton>
         </Form>
       )}

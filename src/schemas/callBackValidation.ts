@@ -1,24 +1,27 @@
 import * as yup from "yup";
 import { checkoutPhoneRegex, nameRegex } from "../regex/regex";
+import { useTranslations } from "next-intl";
 
-export const callBackValidation = () => {
+export const useCallBackValidation = () => {
+  const t = useTranslations("validation");
+
   const callBackFormValidationSchema = yup.object().shape({
     name: yup
       .string()
-      .min(2, "Повинно містити від 2 до 30 символів")
-      .max(30, "Повинно містити від 2 до 30 символів")
-      .matches(nameRegex, "Допустимі літери та дефіс, апостроф, лапки")
-      .required("Дане поле є обов'язковим до заповнення"),
+      .min(2, t("name.minMax"))
+      .max(30, t("name.minMax"))
+      .matches(nameRegex, t("name.pattern"))
+      .required(t("name.required")),
 
     phone: yup
       .string()
-      .matches(checkoutPhoneRegex, "Вкажіть правильний номер телефону")
+      .matches(checkoutPhoneRegex, t("phone.pattern"))
       .test(
         "first-digit-after-38",
-        "Після +38 має бути цифра 0",
+        t("phone.firstDigit"),
         (value) => !!value && value.startsWith("+38 (0")
       )
-      .required("Дане поле є обов'язковим до заповнення"),
+      .required(t("phone.required")),
   });
 
   return callBackFormValidationSchema;

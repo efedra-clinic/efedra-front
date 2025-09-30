@@ -3,8 +3,11 @@ import Link from "next/link";
 import MainButton from "@/components/shared/buttons/MainButton";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
+import { useTranslations } from "next-intl";
 
 export default function Services() {
+  const t = useTranslations("mission.services");
+
   return (
     <div>
       <div className="flex flex-col md:flex-row gap-7 mb-7 lg:mb-[54px]">
@@ -33,15 +36,14 @@ export default function Services() {
         >
           <div className="px-6 pt-6">
             <h3 className="mb-[33px] font-evolenta text-[24px] font-normal leading-[133%] uppercase">
-              Стоматологія
+              {t("dentistry.title")}
             </h3>
             <p className="mb-12 text-[14px] font-light leading-[120%]">
-              Професійне лікування без болю, з турботою та сучасними методами.
-              Поверніть здоров’я та впевненість вашій усмішці.
+              {t("dentistry.description")}
             </p>
           </div>
           <Link href="/dentistry">
-            <MainButton>Стоматологія</MainButton>
+            <MainButton>{t("dentistry.button")}</MainButton>
           </Link>
         </motion.div>
       </div>
@@ -71,16 +73,15 @@ export default function Services() {
         >
           <div className="px-6 pt-6">
             <h3 className="mb-8 font-evolenta text-[24px] font-normal leading-[133%] uppercase">
-              Естетична медицина
+              {t("aesthetic.title")}
             </h3>
             <p className="mb-12 text-[14px] font-light leading-[120%]">
-              Натуральна краса без перебільшень — делікатний підхід, перевірені
-              препарати та результат, який дарує впевненість.
+              {t("aesthetic.description")}
             </p>
           </div>
           <Link href="/aesthetic">
             <MainButton variant="beige" className="px-5 lg:px-5">
-              Естетична медицина
+              {t("aesthetic.button")}
             </MainButton>
           </Link>
         </motion.div>

@@ -1,12 +1,16 @@
-export const categoriesData = {
-  dentistry: {
-    title: "Послуги стоматології",
-    description:
-      "У нашому центрі доступний повний спектр стоматологічних послуг — від профілактики до імплантації. Ознайомтесь з процедурами та оберіть те, що вам потрібно.",
-  },
-  aesthetic: {
-    title: "Послуги естетичної медицини",
-    description:
-      "Ми пропонуємо широкий вибір естетичних процедур — для молодості, свіжості та здоров'я вашої шкіри. Оберіть напрям, який вас цікавить.",
-  },
+import { getTranslations } from "next-intl/server";
+
+export const getCategoriesData = async () => {
+  const t = await getTranslations("catalog");
+
+  return {
+    dentistry: {
+      title: t("dentistry.title"),
+      description: t("dentistry.description"),
+    },
+    aesthetic: {
+      title: t("aesthetic.title"),
+      description: t("aesthetic.description"),
+    },
+  };
 };

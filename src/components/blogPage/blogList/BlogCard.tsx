@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import FormattedDate from "@/components/shared/formattedDate/FormattedDate";
 import { urlFor } from "@/utils/getUrlForSanityImage";
+import { useTranslations } from "next-intl";
 
 interface BlogCardProps {
   post: Post;
@@ -13,6 +14,7 @@ interface BlogCardProps {
 
 export default function BlogCard({ post }: BlogCardProps) {
   const { title, image, direction, slug, description, createdAt } = post;
+  const t = useTranslations("buttons");
 
   return (
     <Link
@@ -46,7 +48,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             variant="beige"
             className="h-[42px] text-[14px] font-medium"
           >
-            Читаті далі
+            {t("readMore")}
           </MainButton>
         </div>
       </div>

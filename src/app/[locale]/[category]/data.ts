@@ -12,138 +12,127 @@ import ApproachMedicineDesk from "@/components/shared/icons/ApproachMedicineDesk
 import ApproachMedicineMob from "@/components/shared/icons/ApproachMedicineMob";
 import MedicineIcon from "@/components/shared/icons/MedicineIcon";
 
-export const categoriesData = {
-  dentistry: {
-    hero: {
-      title: "Стоматологія, якій можна довіряти",
-      description:
-        "Сучасні технології, делікатний підхід і впевненість в результаті.",
-      imageOne: "/images/categoryPage/hero/dentistryOne.webp",
-      imageTwo: "/images/categoryPage/hero/dentistryTwo.webp",
-    },
-    approach: {
-      imageMob: ApproachDentistryMob,
-      imageDesk: ApproachDentistryDesk,
-      imageTwo: "/images/categoryPage/approach/dentistryTwo.webp",
-      list: [
-        {
-          title: "Лікування без болю",
-          description:
-            "Використовуємо сучасні методи анестезії та технології, щоб лікування проходило комфортно та безболісно.",
-        },
-        {
-          title: "Індивідуальні плани",
-          description:
-            "Кожен пацієнт отримує персональний план лікування з урахуванням стану здоров’я, потреб і побажань.",
-        },
-        {
-          title: "Сучасне обладнання",
-          description:
-            "Оснащені новітньою технікою, що дозволяє діагностувати точно, лікувати ефективно й з мінімальним втручанням.",
-        },
-        {
-          title: "Стерильність і безпека",
-          description:
-            "Дотримуємось усіх медичних протоколів стерильності та гігієни. Ваше здоров’я — під надійним захистом.",
-        },
-      ],
-    },
-    advantages: [
-      {
-        value: "Комфортне лікування",
-        description:
-          "Дотримуємось найвищих стандартів стерильності, дезінфекції та безпеки у всіх процедурах.",
-        icon: HeartsIcon,
-      },
-      {
-        value: "Досвідчені спеціалісти",
-        description:
-          "Дотримуємось найвищих стандартів стерильності, дезінфекції та безпеки у всіх процедурах.",
-        icon: DoctorIcon,
-      },
-      {
-        value: "Прозоре ціноутворення",
-        description:
-          "Працюємо прозоро — ви завжди знаєте повну ціну до початку лікування.",
-        icon: DollarsIcon,
-      },
-      {
-        value: "Естетичний підхід",
-        description:
-          "Досягаємо результатів, що виглядають природно та гармонійно, без надмірностей.",
-        icon: StarsIcon,
-      },
-      {
-        value: "Стерильність і безпека",
-        description:
-          "Дотримуємось найвищих стандартів стерильності, дезінфекції та безпеки у всіх процедурах",
-        icon: SafetyIcon,
-      },
-    ],
-  },
-  aesthetic: {
-    hero: {
-      title: "Естетична медицина: делікатна турбота про вашу красу",
-      description: "Безпечно. Ефективно. Естетично.",
-      imageOne: "/images/categoryPage/hero/medicineOne.webp",
-      imageTwo: "/images/categoryPage/hero/medicineTwo.webp",
-    },
-    approach: {
-      imageMob: ApproachMedicineMob,
-      imageDesk: ApproachMedicineDesk,
-      imageTwo: "/images/categoryPage/approach/medicineTwo.webp",
-      list: [
-        {
-          title: "Увага до деталей",
-          description:
-            "Дбайливо опрацьовуємо кожен етап — від консультації до результату.",
-        },
-        {
-          title: "Тільки сертифіковані препарати",
-          description:
-            "Використовуємо офіційні, безпечні засоби з перевіреним походженням..",
-        },
-        {
-          title: "Лікарі з кваліфікацією",
-          description:
-            "Процедури проводять лише фахівці з медичною освітою та досвідом.",
-        },
-        {
-          title: "Натуральний результат",
-          description: "Працюємо на гармонію, а не на перебільшений ефект.",
-        },
-      ],
-    },
-    advantages: [
-      {
-        value: "Натуральний результат",
-        description: "Робимо акцент на природній красі без перебільшень.",
-        icon: LeafInHeartIcon,
-      },
+import { getTranslations } from "next-intl/server";
 
-      {
-        value: "Стерильність і безпека",
-        description:
-          "Дотримуємось найвищих стандартів стерильності, дезінфекції та безпеки у всіх процедурах.",
-        icon: SafetyIcon,
+export const getCategoriesData = async () => {
+  const t = await getTranslations("categoryPage");
+
+  return {
+    dentistry: {
+      hero: {
+        title: t("dentistry.hero.title"),
+        description: t("dentistry.hero.description"),
+        imageOne: "/images/categoryPage/hero/dentistryOne.webp",
+        imageTwo: "/images/categoryPage/hero/dentistryTwo.webp",
       },
-      {
-        value: "Комфортні процедури",
-        description: "Дбаємо про ваш спокій до, під час і після процедури.",
-        icon: SmileIcon,
+      approach: {
+        imageMob: ApproachDentistryMob,
+        imageDesk: ApproachDentistryDesk,
+        imageTwo: "/images/categoryPage/approach/dentistryTwo.webp",
+        list: [
+          {
+            title: t("dentistry.approach.painless.title"),
+            description: t("dentistry.approach.painless.description"),
+          },
+          {
+            title: t("dentistry.approach.individual.title"),
+            description: t("dentistry.approach.individual.description"),
+          },
+          {
+            title: t("dentistry.approach.equipment.title"),
+            description: t("dentistry.approach.equipment.description"),
+          },
+          {
+            title: t("dentistry.approach.safety.title"),
+            description: t("dentistry.approach.safety.description"),
+          },
+        ],
       },
-      {
-        value: "Перевірені препарати",
-        description:
-          "Дотримуємось найвищих стандартів стерильності, дезінфекції та безпеки у всіх процедурах",
-        icon: MedicineIcon,
+      advantages: [
+        {
+          value: t("dentistry.advantages.comfort.title"),
+          description: t("dentistry.advantages.comfort.description"),
+          icon: HeartsIcon,
+        },
+        {
+          value: t("dentistry.advantages.specialists.title"),
+          description: t("dentistry.advantages.specialists.description"),
+          icon: DoctorIcon,
+        },
+        {
+          value: t("dentistry.advantages.pricing.title"),
+          description: t("dentistry.advantages.pricing.description"),
+          icon: DollarsIcon,
+        },
+        {
+          value: t("dentistry.advantages.aesthetic.title"),
+          description: t("dentistry.advantages.aesthetic.description"),
+          icon: StarsIcon,
+        },
+        {
+          value: t("dentistry.advantages.safety.title"),
+          description: t("dentistry.advantages.safety.description"),
+          icon: SafetyIcon,
+        },
+      ],
+    },
+    aesthetic: {
+      hero: {
+        title: t("aesthetic.hero.title"),
+        description: t("aesthetic.hero.description"),
+        imageOne: "/images/categoryPage/hero/medicineOne.webp",
+        imageTwo: "/images/categoryPage/hero/medicineTwo.webp",
       },
-      {
-        value: "Досвідчені спеціалісти",
-        description:
-          "Забезпечуємо лікування командою лікарів із багаторічною практикою та сучасним підходом.",
-        icon: DoctorIcon,
+      approach: {
+        imageMob: ApproachMedicineMob,
+        imageDesk: ApproachMedicineDesk,
+        imageTwo: "/images/categoryPage/approach/medicineTwo.webp",
+        list: [
+          {
+            title: t("aesthetic.approach.details.title"),
+            description: t("aesthetic.approach.details.description"),
+          },
+          {
+            title: t("aesthetic.approach.certified.title"),
+            description: t("aesthetic.approach.certified.description"),
+          },
+          {
+            title: t("aesthetic.approach.qualified.title"),
+            description: t("aesthetic.approach.qualified.description"),
+          },
+          {
+            title: t("aesthetic.approach.natural.title"),
+            description: t("aesthetic.approach.natural.description"),
+          },
+        ],
       },
-    ],
-  },
+      advantages: [
+        {
+          value: t("aesthetic.advantages.natural.title"),
+          description: t("aesthetic.advantages.natural.description"),
+          icon: LeafInHeartIcon,
+        },
+        {
+          value: t("aesthetic.advantages.safety.title"),
+          description: t("aesthetic.advantages.safety.description"),
+          icon: SafetyIcon,
+        },
+        {
+          value: t("aesthetic.advantages.comfort.title"),
+          description: t("aesthetic.advantages.comfort.description"),
+          icon: SmileIcon,
+        },
+        {
+          value: t("aesthetic.advantages.verified.title"),
+          description: t("aesthetic.advantages.verified.description"),
+          icon: MedicineIcon,
+        },
+        {
+          value: t("aesthetic.advantages.specialists.title"),
+          description: t("aesthetic.advantages.specialists.description"),
+          icon: DoctorIcon,
+        },
+      ],
+    },
+  };
 };

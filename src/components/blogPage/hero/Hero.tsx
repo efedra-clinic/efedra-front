@@ -2,8 +2,11 @@ import Container from "@/components/shared/container/Container";
 import Image from "next/image";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
+import { useTranslations } from "next-intl";
 
 export default function Hero() {
+  const t = useTranslations("blogPage.hero");
+
   return (
     <section className="pt-3.5 pb-12 lg:pt-[42px] lg:pb-[105px]">
       <Container className="flex flex-col md:flex-row-reverse md:justify-end gap-[26px] md:gap-[76px] overflow-visible">
@@ -37,7 +40,7 @@ export default function Hero() {
               variants={fadeInAnimation({ x: -20 })}
               className="max-w-[377px] lg:max-w-[524px] font-evolenta text-[24px] lg:text-[36px] font-normal leading-[133%] uppercase"
             >
-              Блог Efedra: експертно й доступно
+              {t("title")}
             </motion.h1>
             <motion.div
               initial="hidden"
@@ -64,9 +67,7 @@ export default function Hero() {
             variants={fadeInAnimation({ y: 20, delay: 0.3 })}
             className="md:mb-[63px] md:max-w-[384px]"
           >
-            Ми віримо, що поінформованість — це впевненість. Тому ділимось
-            знаннями, пояснюємо підходи та говоримо про естетику й медицину без
-            перебільшень — чесно, ясно і з повагою до вас.
+            {t("description")}
           </motion.p>
           <motion.div
             initial="hidden"

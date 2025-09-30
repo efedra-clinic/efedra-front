@@ -1,6 +1,7 @@
 import Image from "next/image";
 import clsx from "clsx";
 import { twMerge } from "tailwind-merge";
+import { useTranslations } from "next-intl";
 
 interface DirectionTagProps {
   direction: string;
@@ -11,6 +12,7 @@ export default function DirectionTag({
   direction,
   className = "",
 }: DirectionTagProps) {
+  const t = useTranslations("reviews.direction");
   return (
     <div
       className={twMerge(
@@ -26,7 +28,7 @@ export default function DirectionTag({
         width="11"
         height="11"
       />
-      <p>{direction === "aesthetic" ? "Естетична медицина" : "Стоматологія"}</p>
+      <p>{direction === "aesthetic" ? t("aesthetic") : t("dentistry")}</p>
     </div>
   );
 }

@@ -26,7 +26,7 @@ const evolenta = localFont({
 });
 
 export async function generateMetadata() {
-  return getDefaultMetadata();
+  return await getDefaultMetadata();
 }
 
 export default async function LocaleLayout({

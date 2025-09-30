@@ -1,5 +1,6 @@
 import { PriceService } from "@/types/price";
 import { twMerge } from "tailwind-merge";
+import { useTranslations } from "next-intl";
 
 interface ServicePriceListProps {
   services: PriceService[];
@@ -10,19 +11,21 @@ export default function ServicePriceList({
   services,
   colorScheme,
 }: ServicePriceListProps) {
+  const t = useTranslations("priceList");
+
   return (
     <>
       <div
         className={`hidden md:grid md:grid-cols-[2.5fr_1.75fr_0.7fr] lg:grid-cols-[2.5fr_1.75fr_0.5fr] border-x border-b border-t border-${colorScheme} rounded-[32px] mt-[6px]`}
       >
         <div className="pl-[46px] py-[18px] uppercase font-evolenta text-[12px] md:text-[14px] text-left">
-          Назва послуги
+          {t("serviceName")}
         </div>
         <div className="py-[18px] uppercase font-evolenta text-[12px] md:text-[14px] text-center">
-          Вартість
+          {t("cost")}
         </div>
         <div className="pr-[27px] py-[18px] uppercase font-evolenta text-[12px] md:text-[14px] text-center">
-          Час (хв)
+          {t("time")}
         </div>
 
         {services
@@ -73,7 +76,9 @@ export default function ServicePriceList({
                 <div className="flex justify-between text-[12px] leading-[133%]">
                   <span>{service.price || "—"}</span>
                   <span>
-                    {service.duration ? `${service.duration} хв` : "—"}
+                    {service.duration
+                      ? `${service.duration} ${t("minutes")}`
+                      : "—"}
                   </span>
                 </div>
               </div>

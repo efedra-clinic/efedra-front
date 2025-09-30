@@ -9,6 +9,7 @@ import {
   listVariants,
 } from "@/utils/animationVariants";
 import { urlFor } from "@/utils/getUrlForSanityImage";
+import { useTranslations } from "next-intl";
 
 interface DescriptionProps {
   service: Service;
@@ -17,6 +18,7 @@ interface DescriptionProps {
 
 export default function Description({ service, variant }: DescriptionProps) {
   const { procedureDescription } = service;
+  const t = useTranslations("servicePage.sections");
 
   if (!procedureDescription) return null;
 
@@ -26,7 +28,7 @@ export default function Description({ service, variant }: DescriptionProps) {
     <section className="pt-15 lg:pt-25">
       <Container>
         <SectionTitle variant={variant} className="md:hidden">
-          опис процедури
+          {t("description")}
         </SectionTitle>
         <div className="flex flex-col gap-6 md:gap-10 lg:gap-15 pt-1 md:pt-0">
           <div className="flex flex-col md:flex-row-reverse gap-6 xl:gap-[95px]">
@@ -52,7 +54,7 @@ export default function Description({ service, variant }: DescriptionProps) {
             </motion.div>
             <div className="flex flex-col md:max-w-[350px]">
               <SectionTitle variant={variant} className="hidden md:block">
-                опис процедури
+                {t("description")}
               </SectionTitle>
               <motion.h3
                 initial="hidden"
@@ -62,7 +64,7 @@ export default function Description({ service, variant }: DescriptionProps) {
                 variants={fadeInAnimation({ x: -20, delay: 0.3 })}
                 className="font-evolenta text-[24px] leading-[133%] uppercase mb-5 md:mt-4"
               >
-                Опис процедури
+                {t("descriptionTitle")}
               </motion.h3>
               <motion.p
                 initial="hidden"
@@ -106,7 +108,7 @@ export default function Description({ service, variant }: DescriptionProps) {
                 variants={fadeInAnimation({ x: -20, delay: 0.3 })}
                 className="uppercase font-evolenta text-[24px] leading-[133%]"
               >
-                Інформація про процедуру
+                {t("procedureInfo")}
               </motion.h3>
               <motion.ul
                 initial="hidden"

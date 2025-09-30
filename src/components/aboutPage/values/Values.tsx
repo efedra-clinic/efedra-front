@@ -6,37 +6,35 @@ import ResultIcon from "@/components/shared/icons/ResultIcon";
 import SafetyIcon from "@/components/shared/icons/SafetyIcon";
 import GrowthIcon from "@/components/shared/icons/GrowthIcon";
 import IconTextList from "@/components/shared/iconTextComponents/IconTextList";
+import { useTranslations } from "next-intl";
 
 export default function Values() {
+  const t = useTranslations("values");
+
   const values = [
     {
-      value: "Емпатія та увага",
-      description:
-        "Ми вміємо слухати, розуміємо ваші переживання та ставимося до кожного з турботою та повагою.",
+      value: t("empathy.title"),
+      description: t("empathy.description"),
       icon: EmpathyIcon,
     },
     {
-      value: "Чесні рекомендації",
-      description:
-        "Пропонуємо лише те, що справді необхідно. Жодних зайвих процедур — тільки прозорі рішення.",
+      value: t("honest.title"),
+      description: t("honest.description"),
       icon: RecommendationIcon,
     },
     {
-      value: "Робота на результат",
-      description:
-        "Ми орієнтовані на ефективність — довготривалий, помітний результат і задоволення пацієнта.",
+      value: t("result.title"),
+      description: t("result.description"),
       icon: ResultIcon,
     },
     {
-      value: "Безпека та стерильність",
-      description:
-        "Дотримуємось найвищих стандартів стерильності, дезінфекції та безпеки у всіх процедурах.",
+      value: t("safety.title"),
+      description: t("safety.description"),
       icon: SafetyIcon,
     },
     {
-      value: "Розвиток команди",
-      description:
-        "Наші фахівці постійно підвищують кваліфікацію, освоюють нові методики та впроваджують інновації.",
+      value: t("growth.title"),
+      description: t("growth.description"),
       icon: GrowthIcon,
     },
   ];
@@ -44,12 +42,9 @@ export default function Values() {
   return (
     <section className="pt-[60px] lg:pt-[102px]">
       <Container>
-        <SectionTitle>Цінності і підхід</SectionTitle>
+        <SectionTitle>{t("title")}</SectionTitle>
 
-        <IconTextList
-          title="Ваше благополуччя — наш пріоритет"
-          items={values}
-        />
+        <IconTextList title={t("subtitle")} items={values} />
       </Container>
     </section>
   );

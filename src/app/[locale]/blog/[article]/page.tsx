@@ -27,8 +27,9 @@ export async function generateMetadata({
   });
 
   return {
-    title: `${currentPost?.title}` || getDefaultMetadata().title,
-    description: currentPost?.description || getDefaultMetadata().description,
+    title: `${currentPost?.title}` || (await getDefaultMetadata()).title,
+    description:
+      currentPost?.description || (await getDefaultMetadata()).description,
     openGraph: {
       images: [
         {

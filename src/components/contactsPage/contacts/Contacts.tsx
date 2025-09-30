@@ -6,8 +6,11 @@ import { fadeInAnimation } from "@/utils/animationVariants";
 import ContactsList from "./ContactsList";
 import Map from "./Map";
 import SocialMedia from "@/components/shared/socialMedia/SocialMedia";
+import { useTranslations } from "next-intl";
 
 export default function Contacts() {
+  const t = useTranslations("contactsPage");
+
   return (
     <section className="pt-[26px] pb-12 lg:pt-13 lg:pb-[78px]">
       <Container className="relative">
@@ -50,7 +53,7 @@ export default function Contacts() {
                 variants={fadeInAnimation({ scale: 0.95, delay: 0.3 })}
                 className="font-evolenta text-[24px] md:text-[28px] lg:text-[34px] xl:text-[48px] leading-[135%] uppercase max-w-[200px] xs:max-w-full md:max-w-[200px] lg:max-w-[235px] xl:max-w-[330px] mb-[17px] md:mb-0"
               >
-                звʼязатися з нами <span className="italic">легко</span>!
+                {t("title")} <span className="italic">{t("easy")}</span>!
               </motion.h1>
               <motion.div
                 initial="hidden"
@@ -61,7 +64,7 @@ export default function Contacts() {
                 className="hidden md:block w-full"
               >
                 <h2 className="mb-4 font-evolenta text-[20px] leading-[133%] uppercase">
-                  Слідкуйте за нами в Instagram!
+                  {t("followUs")}
                 </h2>
                 <SocialMedia
                   className="flex flex-col gap-3 md:gap-2"
@@ -101,7 +104,7 @@ export default function Contacts() {
               className="md:hidden w-full"
             >
               <h2 className="mb-4 font-evolenta text-[20px] leading-[133%] uppercase">
-                Слідкуйте за нами в Instagram!
+                {t("followUs")}
               </h2>
               <SocialMedia
                 className="flex flex-col gap-3 md:gap-2"
