@@ -2,7 +2,7 @@ import { Post } from "@/types/post";
 import Image from "next/image";
 import DirectionTag from "../../shared/directionTag/DirectionTag";
 import EstimatedReadingTime from "@/components/shared/estReadingTime/estimatedReadingTime";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
 import { urlFor } from "@/utils/getUrlForSanityImage";

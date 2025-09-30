@@ -1,7 +1,7 @@
 import MainButton from "@/components/shared/buttons/MainButton";
 import { Service } from "@/types/service";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { urlFor } from "@/utils/getUrlForSanityImage";
 import { useTranslations } from "next-intl";
 

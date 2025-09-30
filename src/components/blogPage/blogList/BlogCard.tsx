@@ -3,7 +3,7 @@ import DirectionTag from "@/components/shared/directionTag/DirectionTag";
 import EstimatedReadingTime from "@/components/shared/estReadingTime/estimatedReadingTime";
 import { Post } from "@/types/post";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import FormattedDate from "@/components/shared/formattedDate/FormattedDate";
 import { urlFor } from "@/utils/getUrlForSanityImage";
 import { useTranslations } from "next-intl";

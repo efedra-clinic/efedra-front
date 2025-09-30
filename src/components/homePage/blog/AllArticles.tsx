@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import SecondaryButton from "@/components/shared/buttons/SecondaryButton";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";

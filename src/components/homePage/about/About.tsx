@@ -1,7 +1,7 @@
 import Container from "@/components/shared/container/Container";
 import SectionTitle from "@/components/shared/titles/SectionTitle";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import BenefitsList from "@/components/shared/benefits/BenefitsList";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";

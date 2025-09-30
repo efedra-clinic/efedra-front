@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Container from "../container/Container";
 import LogoIcon from "../icons/LogoIcon";
 import BurgerMenu from "./burgerMenu/BurgerMenu";
@@ -24,7 +24,7 @@ export default function Header() {
       className="fixed z-10 top-0 left-0 w-dvw py-6 bg-white"
     >
       <Container className="flex items-center justify-between">
-        <div className="flex items-center gap-10 xl:gap-15">
+        <div className="flex items-center gap-10 xl:gap-14">
           {" "}
           <NavMenu navList={navListOne} className="hidden lg:flex" />
           <Link

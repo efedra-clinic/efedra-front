@@ -1,7 +1,7 @@
 import SecondaryButton from "@/components/shared/buttons/SecondaryButton";
 import { Post } from "@/types/post";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
 import { urlFor } from "@/utils/getUrlForSanityImage";

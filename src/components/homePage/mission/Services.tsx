@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import MainButton from "@/components/shared/buttons/MainButton";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
