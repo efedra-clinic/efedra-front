@@ -9,9 +9,19 @@ import { allPriceCategoriesQuery } from "@/lib/queries";
 import { fetchSanityDataServer } from "@/utils/fetchSanityDataServer";
 import CTAFormWithBackground from "@/components/shared/cta/CTAFormWithBackground";
 import { getTranslations } from "next-intl/server";
+import { deepLocalize } from "@/utils/getLocalizedContent";
 
-export default async function PricePage() {
+export default async function PricePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   const categories = await fetchSanityDataServer(allPriceCategoriesQuery);
+
+  // Localize the categories data
+  const localizedCategories = deepLocalize(categories || [], locale);
+
   const t = await getTranslations("price");
 
   return (
@@ -22,7 +32,7 @@ export default async function PricePage() {
       />
       <MarqueeLine variant="blue" />
       <Suspense fallback={<Loader />}>
-        <PriceList categories={categories} />
+        <PriceList categories={localizedCategories} />
       </Suspense>
       <CTAFormWithBackground
         image="/images/shared/cosmetology.webp"

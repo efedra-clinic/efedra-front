@@ -77,7 +77,7 @@ export default function LocaleSwitcher() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="absolute right-0 mt-1 w-[65px] bg-white shadow-social rounded-[8px] z-50"
+            className="absolute right-0 mt-1 w-[65px] xl:w-[72px] bg-white shadow-md rounded-[8px] z-50"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -87,13 +87,13 @@ export default function LocaleSwitcher() {
               <button
                 key={locale}
                 onClick={() => handleLocaleChange(locale)}
-                className={`cursor-pointer w-full flex items-center px-4 py-2`}
+                className={`cursor-pointer w-full flex items-center justify-center px-4 py-2`}
               >
                 <span
                   className={`uppercase xl:hover:text-beige focus-visible:text-beige transition duration-300 ease-in-out ${
                     currentLocale === locale
                       ? "text-beige text-[16px] lg:text-[14px] xl:text-[16px] font-medium"
-                      : "text-black text-[16px] lg:text-[14px] xl:text-[16px]font-medium"
+                      : "text-black text-[16px] lg:text-[14px] xl:text-[16px] font-medium"
                   }`}
                 >
                   {locale === "uk" ? "UA" : locale}

@@ -12,6 +12,8 @@ interface PriceListProps {
 }
 
 export default function PriceList({ categories }: PriceListProps) {
+  if (!categories || !categories?.length) return null;
+
   return (
     <section className="py-15 lg:pt-[60px] lg:pb-[130px]">
       <Container>

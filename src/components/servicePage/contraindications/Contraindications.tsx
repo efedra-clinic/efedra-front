@@ -24,6 +24,9 @@ export default function Contraindications({
 
   const { image, items } = contraindications;
 
+  // Check if image exists
+  if (!image) return null;
+
   const leftItems = items?.slice(0, Math.floor(items?.length / 2));
   const rightItems = items?.slice(Math.floor(items?.length / 2), items?.length);
 

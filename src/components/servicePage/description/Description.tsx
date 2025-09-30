@@ -24,6 +24,9 @@ export default function Description({ service, variant }: DescriptionProps) {
 
   const { images, info, text } = procedureDescription;
 
+  // Check if images exist and have enough elements
+  if (!images || images.length < 3) return null;
+
   return (
     <section className="pt-15 lg:pt-25">
       <Container>

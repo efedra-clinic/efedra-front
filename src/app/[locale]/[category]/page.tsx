@@ -15,13 +15,14 @@ import Advantages from "@/components/categoryPage/advantages/Advantages";
 import MeetCenterCTA from "@/components/shared/cta/MeetCenterCTA";
 import CTAFormWithBackground from "@/components/shared/cta/CTAFormWithBackground";
 import { Service } from "@/types/service";
+import { deepLocalize } from "@/utils/getLocalizedContent";
 
 interface CategoryPageProps {
-  params: Promise<{ category: string }>;
+  params: Promise<{ category: string; locale: string }>;
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-  const { category } = await params;
+  const { category, locale } = await params;
 
   const { dentistry, aesthetic } = await getCategoriesData();
 
@@ -29,11 +30,15 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   const servicesList = await fetchSanityDataServer(allServicesQuery);
 
-  const filteredDoctorsList = doctorsList.filter(
+  // Localize the data
+  const localizedDoctorsList = deepLocalize(doctorsList || [], locale);
+  const localizedServicesList = deepLocalize(servicesList || [], locale);
+
+  const filteredDoctorsList = localizedDoctorsList?.filter(
     (doctor: Doctor) => doctor?.direction === category
   );
 
-  const filteredServicesList = servicesList.filter(
+  const filteredServicesList = localizedServicesList?.filter(
     (doctor: Service) => doctor?.category === category
   );
 
