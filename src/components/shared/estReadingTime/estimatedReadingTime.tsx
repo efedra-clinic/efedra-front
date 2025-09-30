@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { calculateReadingTime } from "@/utils/calculateReadingTime";
 import { Post } from "@/types/post";
 import ClockIcon from "../icons/ClockIcon";
+import { useTranslations } from "next-intl";
 
 interface EstimatedReadingTimeProps {
   post: Post;
@@ -14,6 +15,7 @@ export default function EstimatedReadingTime({
   className = "",
 }: EstimatedReadingTimeProps) {
   const readingTime = calculateReadingTime(post);
+  const t = useTranslations("priceList");
 
   return (
     <div
@@ -26,7 +28,9 @@ export default function EstimatedReadingTime({
     >
       <ClockIcon />
 
-      <p>{readingTime} хв</p>
+      <p>
+        {readingTime} {t("minutes")}
+      </p>
     </div>
   );
 }

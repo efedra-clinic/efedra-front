@@ -33,9 +33,10 @@ export async function generateMetadata({
   });
 
   return {
-    title: `${currentService?.title}` || getDefaultMetadata().title,
+    title: `${currentService?.title}` || (await getDefaultMetadata()).title,
     description:
-      currentService?.shortDescription || getDefaultMetadata().description,
+      currentService?.shortDescription ||
+      (await getDefaultMetadata()).description,
     openGraph: {
       images: [
         {

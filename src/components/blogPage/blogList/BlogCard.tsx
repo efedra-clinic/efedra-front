@@ -3,9 +3,10 @@ import DirectionTag from "@/components/shared/directionTag/DirectionTag";
 import EstimatedReadingTime from "@/components/shared/estReadingTime/estimatedReadingTime";
 import { Post } from "@/types/post";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import FormattedDate from "@/components/shared/formattedDate/FormattedDate";
 import { urlFor } from "@/utils/getUrlForSanityImage";
+import { useTranslations } from "next-intl";
 
 interface BlogCardProps {
   post: Post;
@@ -13,6 +14,7 @@ interface BlogCardProps {
 
 export default function BlogCard({ post }: BlogCardProps) {
   const { title, image, direction, slug, description, createdAt } = post;
+  const t = useTranslations("buttons");
 
   return (
     <Link
@@ -29,7 +31,7 @@ export default function BlogCard({ post }: BlogCardProps) {
       </div>
       <div className="flex flex-col justify-between flex-grow py-4 px-2">
         <div>
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center flex-wrap gap-2 mb-4">
             <EstimatedReadingTime post={post} />
             <FormattedDate createdAt={createdAt} />
             <DirectionTag direction={direction} />
@@ -46,7 +48,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             variant="beige"
             className="h-[42px] text-[14px] font-medium"
           >
-            Читаті далі
+            {t("readMore")}
           </MainButton>
         </div>
       </div>

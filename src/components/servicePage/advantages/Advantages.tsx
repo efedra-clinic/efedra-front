@@ -4,6 +4,7 @@ import { Service } from "@/types/service";
 import Image from "next/image";
 import { listVariants, listItemVariants } from "@/utils/animationVariants";
 import * as motion from "motion/react-client";
+import { useTranslations } from "next-intl";
 
 interface AdvantagesProps {
   service: Service;
@@ -12,6 +13,7 @@ interface AdvantagesProps {
 
 export default function Advantages({ service, variant }: AdvantagesProps) {
   const { advantages } = service;
+  const t = useTranslations("servicePage.sections");
 
   if (!advantages || !advantages?.length) return null;
 
@@ -19,7 +21,7 @@ export default function Advantages({ service, variant }: AdvantagesProps) {
     <section className="pt-15 lg:pt-25">
       <Container>
         <SectionTitle variant={variant} className="mb-6 lg:mb-10">
-          Переваги
+          {t("advantages")}
         </SectionTitle>
         <motion.ul
           initial="hidden"

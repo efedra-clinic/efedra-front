@@ -7,6 +7,7 @@ import Container from "../container/Container";
 import { fadeInAnimation } from "@/utils/animationVariants";
 import MainButton from "../buttons/MainButton";
 import CallBackModal from "../modals/CallBackModal";
+import { useTranslations } from "next-intl";
 
 interface VerticalTitleHeroProps {
   title: string;
@@ -18,6 +19,7 @@ export default function VerticalTitleHero({
   image,
 }: VerticalTitleHeroProps) {
   const [isModalShown, setIsModalShown] = useState(false);
+  const t = useTranslations("buttons");
 
   return (
     <section className="pt-[14px] pb-11 lg:pt-4 lg:pb-[35px]">
@@ -66,7 +68,7 @@ export default function VerticalTitleHero({
               iconClassName="w-[26px] h-[21px]"
               iconStrokeColor="var(--color-white)"
             >
-              Записатись
+              {t("signUp")}
             </MainButton>
 
             <MainButton
@@ -77,7 +79,7 @@ export default function VerticalTitleHero({
               iconClassName="w-[26px] h-[21px]"
               iconStrokeColor="var(--color-white)"
             >
-              Записатись
+              {t("signUp")}
             </MainButton>
           </motion.div>
         </div>

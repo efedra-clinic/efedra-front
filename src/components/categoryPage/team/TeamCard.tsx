@@ -1,6 +1,7 @@
 import { Doctor } from "@/types/doctor";
 import Image from "next/image";
 import { urlFor } from "@/utils/getUrlForSanityImage";
+import { useTranslations } from "next-intl";
 
 interface TeamCardProps {
   doctor: Doctor;
@@ -9,6 +10,7 @@ interface TeamCardProps {
 
 export default function TeamCard({ doctor, variant }: TeamCardProps) {
   const { name, photo, position, startYear, description } = doctor;
+  const t = useTranslations("team");
 
   const currentYear = new Date().getFullYear();
   const experience = currentYear - startYear;
@@ -18,15 +20,15 @@ export default function TeamCard({ doctor, variant }: TeamCardProps) {
     const lastTwoDigits = num % 100;
 
     if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
-      return "років";
+      return t("years.many");
     }
     if (lastDigit === 1) {
-      return "рік";
+      return t("years.one");
     }
     if (lastDigit >= 2 && lastDigit <= 4) {
-      return "роки";
+      return t("years.few");
     }
-    return "років";
+    return t("years.many");
   };
 
   return (
@@ -49,7 +51,7 @@ export default function TeamCard({ doctor, variant }: TeamCardProps) {
         </h3>
         <div className="flex items-center gap-2 lg:mb-2">
           <p className="text-[12px] lg:text-[15px] font-medium leading-[120%]">
-            Посада:
+            {t("position")}
           </p>
           <p className="text-[12px] lg:text-[15px] font-normal leading-[120%]">
             {position}
@@ -57,7 +59,7 @@ export default function TeamCard({ doctor, variant }: TeamCardProps) {
         </div>
         <div className="flex items-center gap-2 mb-2 lg:mb-2.5">
           <p className="text-[12px] lg:text-[15px] font-medium leading-[120%]">
-            Стаж:
+            {t("experience")}
           </p>
           <p className="text-[12px] lg:text-[15px] font-normal leading-[120%]">
             {experience} {getYearWord(experience)}

@@ -5,6 +5,7 @@ import Image from "next/image";
 import * as motion from "motion/react-client";
 import { listVariants, listItemVariants } from "@/utils/animationVariants";
 import { urlFor } from "@/utils/getUrlForSanityImage";
+import { useTranslations } from "next-intl";
 
 interface RecommendedProps {
   service: Service;
@@ -13,6 +14,7 @@ interface RecommendedProps {
 
 export default function Recommended({ service, variant }: RecommendedProps) {
   const { recommended } = service;
+  const t = useTranslations("servicePage.sections");
 
   if (!recommended || recommended?.length < 4) return null;
 
@@ -21,7 +23,7 @@ export default function Recommended({ service, variant }: RecommendedProps) {
   return (
     <section className="pt-15 lg:pt-25">
       <Container>
-        <SectionTitle variant={variant}>Коли рекомендовано</SectionTitle>
+        <SectionTitle variant={variant}>{t("recommended")}</SectionTitle>
         <motion.ul
           initial="hidden"
           whileInView="visible"

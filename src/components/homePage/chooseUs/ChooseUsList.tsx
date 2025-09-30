@@ -1,31 +1,30 @@
 import * as motion from "motion/react-client";
 import { listVariants } from "@/utils/animationVariants";
 import ChooseUsItem from "./ChooseUsItem";
+import { useTranslations } from "next-intl";
 
 export default function ChooseUsList() {
+  const t = useTranslations("chooseUsList");
+
   const chooseUsList = [
     {
-      title: "Сучасне обладнання",
-      description:
-        "Ми працюємо з новітніми технологіями — для точності, комфорту та ефективності.",
+      title: t("equipment.title"),
+      description: t("equipment.description"),
       number: "01",
     },
     {
-      title: "Досвідчені лікарі",
-      description:
-        "Кожен спеціаліст — сертифікований, уважний та постійно вдосконалюється.",
+      title: t("doctors.title"),
+      description: t("doctors.description"),
       number: "02",
     },
     {
-      title: "Індивідуальний підхід",
-      description:
-        "Ми не працюємо “за шаблоном” — ви отримаєте персональний план і людське ставлення.",
+      title: t("individual.title"),
+      description: t("individual.description"),
       number: "03",
     },
     {
-      title: "Затишна атмосфера",
-      description:
-        "Спокійна музика, тепло і турбота — створюємо місце, де хочеться залишитися.",
+      title: t("atmosphere.title"),
+      description: t("atmosphere.description"),
       number: "04",
     },
   ];

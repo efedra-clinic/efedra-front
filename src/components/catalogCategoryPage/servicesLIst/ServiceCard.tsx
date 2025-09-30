@@ -1,8 +1,9 @@
 import MainButton from "@/components/shared/buttons/MainButton";
 import { Service } from "@/types/service";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { urlFor } from "@/utils/getUrlForSanityImage";
+import { useTranslations } from "next-intl";
 
 interface ServiceCardProps {
   service: Service;
@@ -16,6 +17,7 @@ export default function ServiceCard({
   category,
 }: ServiceCardProps) {
   const { slug, title, shortDescription, categoryImage } = service;
+  const t = useTranslations("buttons");
 
   return (
     <Link
@@ -42,7 +44,7 @@ export default function ServiceCard({
             className="h-8 lg:h-[50px] px-5 lg:px-5 text-[12px] lg:text-[18px] font-medium"
             variant={variant}
           >
-            Детальніше
+            {t("details")}
           </MainButton>
         </div>
       </div>

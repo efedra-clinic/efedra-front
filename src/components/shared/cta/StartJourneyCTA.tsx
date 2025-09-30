@@ -5,6 +5,7 @@ import * as motion from "motion/react-client";
 import { ctaVariants } from "@/utils/animationVariants";
 import Callback from "./Callback";
 import { twMerge } from "tailwind-merge";
+import { useTranslations } from "next-intl";
 
 interface StartJourneyCTAProps {
   image: string;
@@ -17,6 +18,7 @@ export default function StartJourneyCTA({
   className = "",
   imageClassName = "",
 }: StartJourneyCTAProps) {
+  const t = useTranslations("cta.startJourney");
   return (
     <>
       <section className={className}>
@@ -44,24 +46,24 @@ export default function StartJourneyCTA({
             />
             <div className="flex flex-col gap-[77px] md:flex-row md:justify-between md:items-end ml-4 mt-4 mb-[77px] lg:ml-0 lg:mt-0 md:mb-[164px]">
               <p className="max-w-[212px] lg:max-w-[402px] font-evolenta text-[24px] lg:text-[48px] font-normal leading-[133%] uppercase text-white">
-                Почніть шлях до оновленої версії себе{" "}
-                <span className="italic">вже сьогодні</span>!
+                {t.rich("title", {
+                  italic: (chunks) => <span className="italic">{chunks}</span>
+                })}
               </p>
               <div
                 className="max-w-[160px] flex flex-col gap-4 lg:gap-2.5 ml-auto font-evolenta text-[15px] font-normal leading-[134%] uppercase 
             text-white text-right"
               >
-                <p className="">Естетична медицина</p>
-                <p>Стоматологія</p>
+                <p className="">{t("aesthetic")}</p>
+                <p>{t("dentistry")}</p>
               </div>
             </div>
             <div className="flex flex-col gap-5 md:flex-row md:justify-between items-center py-4 px-3.5 lg:py-5 lg:px-4 rounded-[20px] bg-white">
               <p className="max-w-[324px] lg:max-w-[454px] text-[12px] lg:text-[16px] font-normal lg:font-medium leading-[125%] text-center md:text-left">
-                Маєте питання? Заповніть форму зворотнього звʼязку і ми
-                обовʼязково зателефонуємо Вам!
+                {t("question")}
               </p>
               <Callback
-                buttonText="Замовити дзвінок"
+                buttonText={t("callback")}
                 buttonClassName="px-5 lg:px-5 text-[12px] font-normal lg:text-[18px] lg:font-medium md:max-w-[255px]"
               />
             </div>

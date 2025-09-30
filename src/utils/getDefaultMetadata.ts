@@ -1,18 +1,17 @@
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
 
-export function getDefaultMetadata(): Metadata {
+export async function getDefaultMetadata(): Promise<Metadata> {
+  const t = await getTranslations("metadata");
+
   return {
-    title:
-      "Efedra Clinic - клініка стоматології та естетичної медицини в Одесі",
-    description:
-      "Сучасні методики, професійні лікарі та турбота про вашу красу й здоров’я",
+    title: t("title"),
+    description: t("description"),
     openGraph: {
-      title:
-        "Клініка стоматології та естетичної медицини Efedra Clinic в Одесі",
-      description:
-        "Сучасні методики, професійні лікарі та турбота про вашу красу й здоров’я",
+      title: t("openGraph.title"),
+      description: t("openGraph.description"),
       images: [
         {
           url: `${SITE_URL}/opengraph-image.jpg`,

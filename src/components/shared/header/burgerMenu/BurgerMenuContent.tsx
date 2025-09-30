@@ -7,7 +7,7 @@ import {
   fadeInAnimation,
 } from "@/utils/animationVariants";
 import NavMenu from "../navMenu/NavMenu";
-import { navListOne, navListThree, navListTwo } from "../navMenu/navMenuData";
+import { useNavMenuData } from "../navMenu/navMenuData";
 import MainButton from "../../buttons/MainButton";
 import { headerPhoneRegex } from "@/regex/regex";
 import { PHONE } from "@/constants/constants";
@@ -23,6 +23,7 @@ export default function BurgerMenuContent({
   isOpen,
   onClose,
 }: BurgerMenuContentProps) {
+  const { navListOne, navListTwo, navListThree } = useNavMenuData();
   return (
     <AnimatePresence>
       {isOpen && (

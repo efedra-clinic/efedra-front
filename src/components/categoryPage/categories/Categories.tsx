@@ -4,6 +4,7 @@ import { Service } from "@/types/service";
 import CategoriesList from "./CategoriesListDentistry";
 import CategoriesListDentistry from "./CategoriesListDentistry";
 import CategoriesListAesthetic from "./CategoryListAesthetic";
+import { useTranslations } from "next-intl";
 
 interface CategoriesProps {
   categories: Service[];
@@ -11,6 +12,8 @@ interface CategoriesProps {
 }
 
 export default function Categories({ categories, variant }: CategoriesProps) {
+  const t = useTranslations("categories");
+
   if (
     !categories ||
     (variant === "blue" && categories?.length < 6) ||
@@ -22,7 +25,7 @@ export default function Categories({ categories, variant }: CategoriesProps) {
     <section className="pt-15 lg:pt-[67px]">
       <Container>
         <SectionTitle variant={variant} className="lg:mb-14">
-          Категорії послуг
+          {t("title")}
         </SectionTitle>
         {variant === "blue" ? (
           <CategoriesListDentistry categories={categories} />

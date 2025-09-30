@@ -2,7 +2,7 @@ import EstimatedReadingTime from "@/components/shared/estReadingTime/estimatedRe
 import { Post } from "@/types/post";
 import Image from "next/image";
 import DirectionTag from "../../shared/directionTag/DirectionTag";
-import Link from "next/link";
+import { Link } from '@/i18n/navigation';
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
 import { urlFor } from "@/utils/getUrlForSanityImage";
@@ -43,7 +43,7 @@ export default function ArticleTwo({ post }: ArticleTwoProps) {
         <p className="mb-6 md:mb-5 text-[12px] font-light leading-[120%] line-clamp-5 md:line-clamp-6">
           {description}
         </p>
-        <div className="flex gap-3 items-center">
+        <div className="flex gap-3 items-center flex-wrap">
           <DirectionTag
             className="px-3 py-1 rounded-full bg-white"
             direction={direction}

@@ -1,9 +1,10 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
 import Container from "@/components/shared/container/Container";
 import Callback from "@/components/categoryPage/hero/CallBack";
 import MainButton from "@/components/shared/buttons/MainButton";
+import { useTranslations } from "next-intl";
 
 interface HeroProps {
   category: { title: string; description: string };
@@ -12,6 +13,7 @@ interface HeroProps {
 
 export default function Hero({ category, variant }: HeroProps) {
   const { title, description } = category;
+  const t = useTranslations("buttons");
 
   return (
     <section className="pt-4 lg:pt-5">
@@ -55,7 +57,7 @@ export default function Hero({ category, variant }: HeroProps) {
                 className="xl:h-14 text-[14px] lg:text-[15px] font-normal lg:font-medium leading-[120%]"
                 withArrow
               >
-                Дивитись ціни
+                {t("viewPrices")}
               </MainButton>
             </Link>
           </motion.div>

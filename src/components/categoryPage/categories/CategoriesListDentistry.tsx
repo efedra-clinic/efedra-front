@@ -1,10 +1,11 @@
 import ArrowIcon from "@/components/shared/icons/ArrowIcon";
 import { Service } from "@/types/service";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
 import { urlFor } from "@/utils/getUrlForSanityImage";
+import { useTranslations } from "next-intl";
 
 interface CategoriesListDentistryProps {
   categories: Service[];
@@ -14,6 +15,7 @@ export default function CategoriesListDentistry({
   categories,
 }: CategoriesListDentistryProps) {
   const currentCategories = categories?.slice(0, 6);
+  const t = useTranslations("buttons");
 
   return (
     <div className="flex flex-col gap-2 lg:gap-[22px]">
@@ -145,7 +147,7 @@ export default function CategoriesListDentistry({
           active:brightness-125 transition duration-300 ease-in-out shrink-0"
         >
           <p className="sm:max-w-[100px] lg:max-w-[147px] mt-1 font-evolenta text-[13px] sm:text-[10px] lg:text-[16px] font-normal leading-[133%] uppercase text-white">
-            Переглянути інші послуги
+            {t("viewOtherServices")}
           </p>
           <button
             type="button"

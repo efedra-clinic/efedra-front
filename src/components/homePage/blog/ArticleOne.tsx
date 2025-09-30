@@ -1,10 +1,11 @@
 import SecondaryButton from "@/components/shared/buttons/SecondaryButton";
 import { Post } from "@/types/post";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
 import { urlFor } from "@/utils/getUrlForSanityImage";
+import { useTranslations } from "next-intl";
 
 interface ArticleOneProps {
   post: Post;
@@ -12,6 +13,7 @@ interface ArticleOneProps {
 
 export default function ArticleOne({ post }: ArticleOneProps) {
   const { title, description, image, slug } = post;
+  const t = useTranslations("buttons");
 
   return (
     <motion.div
@@ -31,8 +33,8 @@ export default function ArticleOne({ post }: ArticleOneProps) {
             <p className="mb-6 text-[12px] font-light leading-[120%] line-clamp-5 xl:line-clamp-4">
               {description}
             </p>
-            <SecondaryButton className="xl:w-[165px] xl:mt-7 px-5 lg:px-[22px] xl:h-14 shrink-0">
-              Читати далі
+            <SecondaryButton className="xl:w-[175px] xl:mt-7 px-5 lg:px-[22px] xl:h-14 shrink-0">
+              {t("readMore")}
             </SecondaryButton>
           </div>
           <div className="relative h-[202px] xl:h-[344px] rounded-[20px] overflow-hidden">

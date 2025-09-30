@@ -8,6 +8,7 @@ import StepsList from "./StepsList";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
 import { urlFor } from "@/utils/getUrlForSanityImage";
+import { useTranslations } from "next-intl";
 
 interface HowItGoesProps {
   service: Service;
@@ -16,6 +17,7 @@ interface HowItGoesProps {
 
 export default function HowItGoes({ service, variant }: HowItGoesProps) {
   const { howItGoes } = service;
+  const t = useTranslations("servicePage.sections");
 
   if (!howItGoes) return null;
 
@@ -25,7 +27,7 @@ export default function HowItGoes({ service, variant }: HowItGoesProps) {
     <section className="pt-15 lg:pt-25">
       <Container className="flex flex-col sm:flex-row gap-6 sm:justify-between">
         <div className="flex flex-col justify-between">
-          <SectionTitle variant={variant}>Як проходить процедура</SectionTitle>
+          <SectionTitle variant={variant}>{t("howItGoes")}</SectionTitle>
           <div className="flex gap-2 lg:gap-4 items-center flex-grow h-auto w-fit mx-auto sm:mx-0">
             <StepsIconMob variant={variant} className="lg:hidden shrink-0" />
             <StepsIconDesk

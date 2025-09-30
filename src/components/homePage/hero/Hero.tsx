@@ -1,11 +1,14 @@
 import MainButton from "@/components/shared/buttons/MainButton";
 import Container from "@/components/shared/container/Container";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
+import { useTranslations } from "next-intl";
 
 export default function Hero() {
+  const t = useTranslations("hero");
+  const tNav = useTranslations("navigation");
   return (
     <section className="pt-3.5 pb-10 lg:pt-[62px] lg:pb-[67px] overflow-hidden">
       <Container className="relative">
@@ -65,9 +68,9 @@ export default function Hero() {
               exit="exit"
               viewport={{ once: true, amount: 0.3 }}
               variants={fadeInAnimation({ y: 20, delay: 0.3 })}
-              className="max-w-[193px] lg:max-w-[307px] mb-4 font-evolenta text-[36px] lg:text-[62px] font-normal leading-[133%] uppercase"
+              className="max-w-[207px] lg:max-w-[352px] mb-4 font-evolenta text-[36px] lg:text-[62px] font-normal leading-[133%] uppercase"
             >
-              здоров'я та краса
+              {t("title")}
             </motion.h1>
             <motion.p
               initial="hidden"
@@ -77,7 +80,7 @@ export default function Hero() {
               variants={fadeInAnimation({ y: 20, delay: 0.6 })}
               className="max-w-[193px] lg:max-w-[307px] font-evolenta text-[16px] lg:text-[20px] font-normal leading-[120%] uppercase"
             >
-              — у надійних руках
+              {t("subtitle")}
             </motion.p>
           </div>
         </div>
@@ -92,7 +95,7 @@ export default function Hero() {
           >
             <Link href="/dentistry">
               <MainButton className="lg:h-[69px] px-5 lg:px-5 text-[16px] lg:text-[24px] font-medium">
-                Стоматологія
+                {tNav("dentistry")}
               </MainButton>
             </Link>
           </motion.div>
@@ -102,14 +105,14 @@ export default function Hero() {
             exit="exit"
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeInAnimation({ x: 20, delay: 1.2 })}
-            className="w-full max-w-[346px] mx-auto lg:mx-0"
+            className="w-full max-w-[356px] mx-auto lg:mx-0"
           >
             <Link href="/aesthetic">
               <MainButton
                 variant="beige"
                 className="lg:h-[69px] px-5 lg:px-5 text-[16px] lg:text-[24px] font-medium"
               >
-                Естетична медицина
+                {tNav("aesthetic")}
               </MainButton>
             </Link>
           </motion.div>

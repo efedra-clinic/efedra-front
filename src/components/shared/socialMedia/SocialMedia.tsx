@@ -5,6 +5,7 @@ import {
   INSTAGRAM_DENTISTRY_URL,
 } from "@/constants/constants";
 import MainButton from "../buttons/MainButton";
+import { useTranslations } from "next-intl";
 
 interface SocialMediaProps {
   className?: string;
@@ -17,6 +18,7 @@ export default function SocialMedia({
   buttonClassName = "",
   dentistryButtonVariant = "white",
 }: SocialMediaProps) {
+  const t = useTranslations("navigation");
   return (
     <ul className={twMerge("flex flex-col gap-2", className)}>
       <li>
@@ -28,11 +30,11 @@ export default function SocialMedia({
           <MainButton
             variant="beige"
             className={twMerge(
-              "h-9 max-w-[144px] px-4 lg:px-4 text-[10px] font-medium",
+              "h-9 max-w-[154px] px-2 lg:px-2 text-[10px] font-medium",
               buttonClassName
             )}
           >
-            Естетична медицина
+            {t("aesthetic")}
           </MainButton>
         </a>
       </li>
@@ -45,11 +47,11 @@ export default function SocialMedia({
           <MainButton
             variant={dentistryButtonVariant}
             className={twMerge(
-              "h-9 max-w-[144px] px-4 lg:px-4 text-[10px] font-medium",
+              "h-9 max-w-[154px] px-4 lg:px-4 text-[10px] font-medium",
               buttonClassName
             )}
           >
-            Стоматологія
+            {t("dentistry")}
           </MainButton>
         </a>
       </li>

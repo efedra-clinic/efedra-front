@@ -9,6 +9,7 @@ import Container from "../container/Container";
 import CallBackForm from "../forms/CallBackForm";
 import NotificationPopUp from "../notifications/NotificationPopUp";
 import Backdrop from "../backdrop/Backdrop";
+import { useTranslations } from "next-intl";
 
 interface CTAFormWithBackgroundProps {
   image: string;
@@ -25,6 +26,8 @@ export default function CTAFormWithBackground({
 }: CTAFormWithBackgroundProps) {
   const [isNotificationShown, setIsNotificationShown] = useState(false);
   const [isError, setIsError] = useState(false);
+  const t = useTranslations("cta.meetCenter");
+  const tModal = useTranslations("modals.callback");
 
   return (
     <section className={className}>
@@ -54,7 +57,7 @@ export default function CTAFormWithBackground({
               variants={fadeInAnimation({ y: 30, delay: 0.3 })}
               className="text-[24px] font-evolenta uppercase text-center leading-[134%] xs:max-w-[378px]"
             >
-              Бажаєте познайомитися з нашим центром особисто?
+              {t("title")}
             </motion.p>
             <motion.div
               initial="hidden"
@@ -102,7 +105,7 @@ export default function CTAFormWithBackground({
               variants={fadeInAnimation({ y: 30, delay: 0.3 })}
               className="text-[20px] lg:text-[24px] xl:text-[32px] font-evolenta uppercase text-center leading-[135%]"
             >
-              Бажаєте познайомитися з нашим центром особисто?
+              {t("title")}
             </motion.p>
             <motion.div
               viewport={{ once: true, amount: 0.3 }}
@@ -118,11 +121,9 @@ export default function CTAFormWithBackground({
         </div>
       </Container>
       <NotificationPopUp
-        title={isError ? "На жаль, щось пішло не так" : "Дякуємо за звернення!"}
+        title={isError ? tModal("error.title") : tModal("success.title")}
         description={
-          isError
-            ? "Спробуйте відправити форму ще раз"
-            : "Наш менеджер скоро зв'яжеться з вами"
+          isError ? tModal("error.description") : tModal("success.description")
         }
         isPopUpShown={isNotificationShown}
         setIsPopUpShown={setIsNotificationShown}

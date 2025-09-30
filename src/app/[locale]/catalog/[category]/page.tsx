@@ -1,7 +1,7 @@
 export const revalidate = 60;
 
 import Hero from "@/components/catalogCategoryPage/hero/Hero";
-import { categoriesData } from "./data";
+import { getCategoriesData } from "./data";
 import ServicesList from "@/components/catalogCategoryPage/servicesLIst/ServicesList";
 import { fetchSanityDataServer } from "@/utils/fetchSanityDataServer";
 import { allServicesQuery } from "@/lib/queries";
@@ -20,7 +20,7 @@ export default async function CatalogCategoryPage({
 }: CatalogCategoryPageProps) {
   const { category } = await params;
 
-  const { dentistry, aesthetic } = categoriesData;
+  const { dentistry, aesthetic } = await getCategoriesData();
 
   const currentCategory = category === "dentistry" ? dentistry : aesthetic;
 

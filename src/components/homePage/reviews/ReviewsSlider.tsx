@@ -1,11 +1,12 @@
 "use client";
-import { reviewsList } from "./data";
+import { useReviewsList } from "./data";
 import SwiperWrapper from "@/components/shared/swiper/SwiperWrapper";
 import { SwiperSlide } from "swiper/react";
 import ReviewCard from "./ReviewCard";
 import { useScreenWidth } from "@/hooks/useScreenWidth";
 
 export default function ReviewsSlider() {
+  const reviewsList = useReviewsList();
   const screenWidth = useScreenWidth();
   const isDesktop = screenWidth >= 1024;
 

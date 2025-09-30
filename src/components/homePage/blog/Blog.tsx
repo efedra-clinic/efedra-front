@@ -7,9 +7,11 @@ import { Suspense } from "react";
 import Loader from "@/components/shared/loader/Loader";
 import * as motion from "motion/react-client";
 import { fadeInAnimation } from "@/utils/animationVariants";
+import { getTranslations } from "next-intl/server";
 
 export default async function Blog() {
   const posts = await fetchSanityDataServer(allPostsQuery);
+  const t = await getTranslations("blog");
 
   const postsList = posts.slice(0, 3);
 
@@ -18,7 +20,7 @@ export default async function Blog() {
       <Container>
         <div className="flex flex-col md:flex-row-reverse sm:justify-between gap-6 mb-10 lg:mb-4.5">
           <SectionTitle animationDirection="left" className="shrink-0">
-            Блог і корисні матеріали
+            {t("title")}
           </SectionTitle>
           <motion.p
             initial="hidden"
@@ -28,7 +30,7 @@ export default async function Blog() {
             variants={fadeInAnimation({ x: -30 })}
             className="max-w-[520px] font-evolenta text-[24px] lg:text-[32px] font-normal leading-[120%] uppercase text-blue"
           >
-            довіряй лише перевіреній інформації
+            {t("subtitle")}
           </motion.p>
         </div>
         <Suspense fallback={<Loader />}>

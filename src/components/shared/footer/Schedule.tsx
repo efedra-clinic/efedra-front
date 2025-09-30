@@ -1,10 +1,16 @@
-import { SCHEDULE } from "@/constants/constants";
+import { SCHEDULE_UK, SCHEDULE_RU } from "@/constants/constants";
 import FooterSubtitle from "./FooterSubtitle";
+import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 export default function Schedule() {
+  const locale = useLocale();
+  const t = useTranslations("contacts");
+  const SCHEDULE = locale === "uk" ? SCHEDULE_UK : SCHEDULE_RU;
+
   return (
     <div>
-      <FooterSubtitle className="mb-[38px]">Графік роботи:</FooterSubtitle>
+      <FooterSubtitle className="mb-[38px]">{t("schedule")}:</FooterSubtitle>
       {SCHEDULE.map((item, idx) => (
         <div
           key={idx}

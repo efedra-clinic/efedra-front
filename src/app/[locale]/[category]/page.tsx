@@ -1,7 +1,7 @@
 export const revalidate = 60;
 
 import Hero from "@/components/categoryPage/hero/Hero";
-import { categoriesData } from "./data";
+import { getCategoriesData } from "./data";
 import MarqueeLine from "@/components/shared/marquee/MarqueeLine";
 import Approach from "@/components/categoryPage/approach/Approach";
 import Categories from "@/components/categoryPage/categories/Categories";
@@ -23,7 +23,7 @@ interface CategoryPageProps {
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category } = await params;
 
-  const { dentistry, aesthetic } = categoriesData;
+  const { dentistry, aesthetic } = await getCategoriesData();
 
   const doctorsList = await fetchSanityDataServer(allDoctorsQuery);
 

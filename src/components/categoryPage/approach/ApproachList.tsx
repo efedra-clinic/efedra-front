@@ -25,7 +25,7 @@ export default function ApproachList({ list, variant }: ApproachListProps) {
           viewport={{ once: true, amount: 0.2 }}
           variants={approachItemVariants}
           key={idx}
-          className={`max-w-[167px] xl:max-w-[310px] ${
+          className={`max-w-[197px] xl:max-w-[310px] ${
             idx === 1 ? "-ml-14 xl:ml-[-129px]" : ""
           } ${idx === 2 ? "-ml-14 xl:ml-[-122px]" : ""}
           }`}
@@ -33,7 +33,7 @@ export default function ApproachList({ list, variant }: ApproachListProps) {
           <h3 className="mb-1 font-evolenta text-[12px] xl:text-[16px] font-normal leading-[120%] uppercase">
             {title}
           </h3>
-          <p className="text-[10px] xl:text-[14px] font-light leading-[120%]">
+          <p className="max-w-[167px] xl:max-w-[310px] text-[10px] xl:text-[14px] font-light leading-[120%]">
             {description}
           </p>
         </motion.li>
