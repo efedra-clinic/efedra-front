@@ -34,7 +34,7 @@ export default function ArticleThree({ post }: ArticleThreeProps) {
         <p className="mb-6 text-[12px] font-light leading-[120%] line-clamp-5 md:line-clamp-6">
           {description}
         </p>
-        <div className="flex gap-3 items-center mb-6">
+        <div className="flex gap-3 items-center flex-wrap mb-6">
           <DirectionTag
             className="px-3 py-1 rounded-full bg-white"
             direction={direction}

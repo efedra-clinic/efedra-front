@@ -80,7 +80,7 @@ export default function Services() {
             </p>
           </div>
           <Link href="/aesthetic">
-            <MainButton variant="beige" className="px-5 lg:px-5">
+            <MainButton variant="beige" className="px-5 lg:px-2">
               {t("aesthetic.button")}
             </MainButton>
           </Link>

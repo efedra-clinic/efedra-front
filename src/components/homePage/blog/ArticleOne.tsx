@@ -33,7 +33,7 @@ export default function ArticleOne({ post }: ArticleOneProps) {
             <p className="mb-6 text-[12px] font-light leading-[120%] line-clamp-5 xl:line-clamp-4">
               {description}
             </p>
-            <SecondaryButton className="xl:w-[165px] xl:mt-7 px-5 lg:px-[22px] xl:h-14 shrink-0">
+            <SecondaryButton className="xl:w-[175px] xl:mt-7 px-5 lg:px-[22px] xl:h-14 shrink-0">
               {t("readMore")}
             </SecondaryButton>
           </div>
