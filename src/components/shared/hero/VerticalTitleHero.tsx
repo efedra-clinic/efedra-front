@@ -68,7 +68,7 @@ export default function VerticalTitleHero({
               iconClassName="w-[26px] h-[21px]"
               iconStrokeColor="var(--color-white)"
             >
-              {t("consultation")}
+              {t("signUp")}
             </MainButton>
 
             <MainButton
@@ -79,7 +79,7 @@ export default function VerticalTitleHero({
               iconClassName="w-[26px] h-[21px]"
               iconStrokeColor="var(--color-white)"
             >
-              {t("consultation")}
+              {t("signUp")}
             </MainButton>
           </motion.div>
         </div>

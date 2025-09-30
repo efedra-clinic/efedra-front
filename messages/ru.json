@@ -303,6 +303,7 @@
   },
   "buttons": {
     "consultation": "Записаться на консультацию",
+    "signUp": "Записаться",
     "viewPrices": "Смотреть цены",
     "details": "Подробнее",
     "viewOtherServices": "Посмотреть другие услуги",

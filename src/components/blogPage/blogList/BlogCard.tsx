@@ -31,7 +31,7 @@ export default function BlogCard({ post }: BlogCardProps) {
       </div>
       <div className="flex flex-col justify-between flex-grow py-4 px-2">
         <div>
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center flex-wrap gap-2 mb-4">
             <EstimatedReadingTime post={post} />
             <FormattedDate createdAt={createdAt} />
             <DirectionTag direction={direction} />
