@@ -287,7 +287,7 @@ export const serviceBySlugQuery = `
 `;
 
 export const allPriceCategoriesQuery = `
-  *[_type == "priceCategory"] | order(_createdAt asc) {
+  *[_type == "priceCategory"] | order(order asc) {
     title,
     colorScheme,
     subcategories[] {
