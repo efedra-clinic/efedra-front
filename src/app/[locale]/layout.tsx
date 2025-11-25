@@ -43,6 +43,12 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
+      <head>
+        <meta
+          name="google-site-verification"
+          content="tatXFYugHOmQUUTbHIzUPHL4Wu8J0THGaI5bQ7HCvjo"
+        />
+      </head>
       <body
         className={`${montserrat.variable} ${evolenta.variable} flex min-h-dvh flex-col antialiased text-[14px] font-normal leading-[120%]`}
       >
