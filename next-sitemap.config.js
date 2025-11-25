@@ -57,6 +57,16 @@ const sitemapConfig = {
       { userAgent: "*", disallow: "/api/*" },
     ],
   },
+  alternateRefs: [
+    {
+      href: `${SITE_URL}/`,
+      hreflang: "uk",
+    },
+    {
+      href: `${SITE_URL}/ru`,
+      hreflang: "ru",
+    },
+  ],
   additionalPaths: async (config) => {
     const staticPages = [
       {
