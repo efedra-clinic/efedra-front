@@ -57,16 +57,28 @@ const sitemapConfig = {
       { userAgent: "*", disallow: "/api/*" },
     ],
   },
-  alternateRefs: [
-    {
-      href: `${SITE_URL}/`,
-      hreflang: "uk",
-    },
-    {
-      href: `${SITE_URL}/ru`,
-      hreflang: "ru",
-    },
-  ],
+  transform: async (config, path) => {
+    const base = config.siteUrl;
+
+    return {
+      loc: `${base}${path}`,
+      lastmod: new Date().toISOString(),
+      changefreq: config.changefreq,
+      priority: config.priority,
+
+      // Альтернативні локалі
+      alternateRefs: [
+        {
+          href: `${base}${path}`,
+          hreflang: "uk",
+        },
+        {
+          href: `${base}/ru${path}`,
+          hreflang: "ru",
+        },
+      ],
+    };
+  },
   additionalPaths: async (config) => {
     const staticPages = [
       {
