@@ -61,7 +61,7 @@ const sitemapConfig = {
     const base = config.siteUrl;
 
     return {
-      loc: `${base}${path}`,
+      loc: path,
       lastmod: new Date().toISOString(),
       changefreq: config.changefreq,
       priority: config.priority,
