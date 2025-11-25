@@ -51,7 +51,7 @@ export async function generateMetadata({
             "/opengraph-image.jpg",
           width: 1200,
           height: 630,
-          alt: "Efedra Clinic",
+          alt: "Efedra Center",
         },
       ],
     },
