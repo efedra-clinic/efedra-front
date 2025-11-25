@@ -57,11 +57,28 @@ const sitemapConfig = {
       { userAgent: "*", disallow: "/api/*" },
     ],
   },
-  transform: async (config, path) => {
+  transform: async (config, path, locale = "uk") => {
     const base = config.siteUrl;
+    
+    // Для uk (дефолтна локаль) - без префіксу, для ru - з префіксом
+    // Особливий випадок для кореневого шляху "/"
+    let localizedPath;
+    if (locale === "uk") {
+      localizedPath = path;
+    } else {
+      localizedPath = path === "/" ? "/ru" : `/ru${path}`;
+    }
+    
+    const fullUrl = `${base}${localizedPath}`;
+    
+    // Формуємо альтернативні посилання
+    const ukPath = path === "/" ? "/" : path;
+    const ruPath = path === "/" ? "/ru" : `/ru${path}`;
+    const ukUrl = `${base}${ukPath}`;
+    const ruUrl = `${base}${ruPath}`;
 
     return {
-      loc: path,
+      loc: localizedPath,
       lastmod: new Date().toISOString(),
       changefreq: config.changefreq,
       priority: config.priority,
@@ -69,11 +86,11 @@ const sitemapConfig = {
       // Альтернативні локалі
       alternateRefs: [
         {
-          href: `${base}/${path}`,
+          href: ukUrl,
           hreflang: "uk",
         },
         {
-          href: `${base}/ru/${path}`,
+          href: ruUrl,
           hreflang: "ru",
         },
       ],
@@ -128,23 +145,35 @@ const sitemapConfig = {
       },
     ];
 
-    const staticPaths = await Promise.all(
-      staticPages.map(async (page) => {
-        const transformed = await config.transform(config, page.loc);
-        return {
-          ...transformed,
-          changefreq: page.changefreq,
-          priority: page.priority,
-        };
-      })
-    );
+    // Генеруємо окремі записи для кожної локалі
+    const locales = ["uk", "ru"];
+    const allStaticPaths = [];
+
+    for (const locale of locales) {
+      const staticPaths = await Promise.all(
+        staticPages.map(async (page) => {
+          const transformed = await config.transform(config, page.loc, locale);
+          return {
+            ...transformed,
+            changefreq: page.changefreq,
+            priority: page.priority,
+          };
+        })
+      );
+      allStaticPaths.push(...staticPaths);
+    }
 
     const dynamicPages = await getDynamicPages(config);
-    const dynamicPaths = await Promise.all(
-      dynamicPages.map((page) => config.transform(config, page))
-    );
+    const allDynamicPaths = [];
 
-    return [...staticPaths, ...dynamicPaths];
+    for (const locale of locales) {
+      const dynamicPaths = await Promise.all(
+        dynamicPages.map((page) => config.transform(config, page, locale))
+      );
+      allDynamicPaths.push(...dynamicPaths);
+    }
+
+    return [...allStaticPaths, ...allDynamicPaths];
   },
 };
 
