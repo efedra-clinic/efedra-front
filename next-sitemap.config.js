@@ -69,11 +69,11 @@ const sitemapConfig = {
       // Альтернативні локалі
       alternateRefs: [
         {
-          href: `${base}${path}`,
+          href: `${base}/${path}`,
           hreflang: "uk",
         },
         {
-          href: `${base}/ru${path}`,
+          href: `${base}/ru/${path}`,
           hreflang: "ru",
         },
       ],
