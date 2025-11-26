@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { getCanonicalUrl } from "./getCanonicalUrl";
+import { getCanonicalUrl, getHreflangUrls } from "./getCanonicalUrl";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
 
@@ -10,8 +10,6 @@ export async function getDefaultMetadata(
 ): Promise<Metadata> {
   const t = await getTranslations("metadata");
   const canonical = getCanonicalUrl(locale, path);
-  
-  // Нормалізуємо baseUrl - видаляємо завершальний слеш, якщо він є
   const baseUrl = (SITE_URL || "").replace(/\/+$/, "");
 
   return {
@@ -19,6 +17,7 @@ export async function getDefaultMetadata(
     description: t("description"),
     alternates: {
       canonical,
+      languages: getHreflangUrls(path),
     },
     openGraph: {
       title: t("openGraph.title"),

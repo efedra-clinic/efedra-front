@@ -43,14 +43,16 @@ export async function generateMetadata({
     locale,
     `/catalog/${category}/${service}`
   );
-  const canonical = defaultMetadata.alternates?.canonical || "";
+
+  const canonical =
+    typeof defaultMetadata.alternates?.canonical === "string"
+      ? defaultMetadata.alternates.canonical
+      : undefined;
 
   return {
     title: localizedTitle || defaultMetadata.title,
     description: localizedDescription || defaultMetadata.description,
-    alternates: {
-      canonical,
-    },
+    alternates: defaultMetadata.alternates,
     openGraph: {
       ...defaultMetadata.openGraph,
       images: [
