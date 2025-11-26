@@ -1,5 +1,6 @@
 export const revalidate = 60;
 
+import type { Metadata } from "next";
 import Hero from "@/components/categoryPage/hero/Hero";
 import { getCategoriesData } from "./data";
 import MarqueeLine from "@/components/shared/marquee/MarqueeLine";
@@ -16,9 +17,17 @@ import MeetCenterCTA from "@/components/shared/cta/MeetCenterCTA";
 import CTAFormWithBackground from "@/components/shared/cta/CTAFormWithBackground";
 import { Service } from "@/types/service";
 import { deepLocalize } from "@/utils/getLocalizedContent";
+import { getDefaultMetadata } from "@/utils/getDefaultMetadata";
 
 interface CategoryPageProps {
   params: Promise<{ category: string; locale: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: CategoryPageProps): Promise<Metadata> {
+  const { category, locale } = await params;
+  return await getDefaultMetadata(locale, `/${category}`);
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {

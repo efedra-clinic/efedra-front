@@ -1,5 +1,6 @@
 export const revalidate = 60;
 
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import PriceList from "@/components/pricePage/PriceList/PriceList";
 import VerticalTitleHero from "@/components/shared/hero/VerticalTitleHero";
@@ -10,6 +11,16 @@ import { fetchSanityDataServer } from "@/utils/fetchSanityDataServer";
 import CTAFormWithBackground from "@/components/shared/cta/CTAFormWithBackground";
 import { getTranslations } from "next-intl/server";
 import { deepLocalize } from "@/utils/getLocalizedContent";
+import { getDefaultMetadata } from "@/utils/getDefaultMetadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return await getDefaultMetadata(locale, "/price");
+}
 
 export default async function PricePage({
   params,

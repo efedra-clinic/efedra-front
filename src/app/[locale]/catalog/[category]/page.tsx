@@ -1,5 +1,6 @@
 export const revalidate = 60;
 
+import type { Metadata } from "next";
 import Hero from "@/components/catalogCategoryPage/hero/Hero";
 import { getCategoriesData } from "./data";
 import ServicesList from "@/components/catalogCategoryPage/servicesLIst/ServicesList";
@@ -11,9 +12,17 @@ import { Service } from "@/types/service";
 import MeetCenterCTA from "@/components/shared/cta/MeetCenterCTA";
 import CTAFormWithBackground from "@/components/shared/cta/CTAFormWithBackground";
 import { deepLocalize } from "@/utils/getLocalizedContent";
+import { getDefaultMetadata } from "@/utils/getDefaultMetadata";
 
 interface CatalogCategoryPageProps {
   params: Promise<{ category: string; locale: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: CatalogCategoryPageProps): Promise<Metadata> {
+  const { category, locale } = await params;
+  return await getDefaultMetadata(locale, `/catalog/${category}`);
 }
 
 export default async function CatalogCategoryPage({
