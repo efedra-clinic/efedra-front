@@ -25,8 +25,13 @@ const evolenta = localFont({
   display: "swap",
 });
 
-export async function generateMetadata() {
-  return await getDefaultMetadata();
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return await getDefaultMetadata(locale, "/");
 }
 
 export default async function LocaleLayout({

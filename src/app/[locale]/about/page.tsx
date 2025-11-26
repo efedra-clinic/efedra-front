@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Advantages from "@/components/aboutPage/advantages/Advantages";
 import CTAFormWithBackground from "@/components/shared/cta/CTAFormWithBackground";
 import Founders from "@/components/aboutPage/founders/Founders";
@@ -6,6 +7,16 @@ import Philosophy from "@/components/aboutPage/philosophy/Philosophy";
 import Values from "@/components/aboutPage/values/Values";
 import MarqueeLine from "@/components/shared/marquee/MarqueeLine";
 import Certificates from "@/components/aboutPage/certificates/Certificates";
+import { getDefaultMetadata } from "@/utils/getDefaultMetadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return await getDefaultMetadata(locale, "/about");
+}
 
 export default function AboutPage() {
   return (

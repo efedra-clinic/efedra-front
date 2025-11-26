@@ -21,13 +21,13 @@ import { urlFor } from "@/utils/getUrlForSanityImage";
 import { getLocalizedContent, deepLocalize } from "@/utils/getLocalizedContent";
 
 interface ServicePageProps {
-  params: Promise<{ service: string; locale: string }>;
+  params: Promise<{ service: string; category: string; locale: string }>;
 }
 
 export async function generateMetadata({
   params,
 }: ServicePageProps): Promise<Metadata> {
-  const { service, locale } = await params;
+  const { service, category, locale } = await params;
 
   const currentService = await fetchSanityDataServer(serviceBySlugQuery, {
     slug: service,
@@ -39,11 +39,20 @@ export async function generateMetadata({
     locale
   );
 
+  const defaultMetadata = await getDefaultMetadata(
+    locale,
+    `/catalog/${category}/${service}`
+  );
+  const canonical = defaultMetadata.alternates?.canonical || "";
+
   return {
-    title: localizedTitle || (await getDefaultMetadata()).title,
-    description:
-      localizedDescription || (await getDefaultMetadata()).description,
+    title: localizedTitle || defaultMetadata.title,
+    description: localizedDescription || defaultMetadata.description,
+    alternates: {
+      canonical,
+    },
     openGraph: {
+      ...defaultMetadata.openGraph,
       images: [
         {
           url:
@@ -54,6 +63,7 @@ export async function generateMetadata({
           alt: "Efedra Center",
         },
       ],
+      url: canonical,
     },
   };
 }

@@ -33,11 +33,17 @@ export async function generateMetadata({
     locale
   );
 
+  const defaultMetadata = await getDefaultMetadata(locale, `/blog/${article}`);
+  const canonical = defaultMetadata.alternates?.canonical || "";
+
   return {
-    title: localizedTitle || (await getDefaultMetadata()).title,
-    description:
-      localizedDescription || (await getDefaultMetadata()).description,
+    title: localizedTitle || defaultMetadata.title,
+    description: localizedDescription || defaultMetadata.description,
+    alternates: {
+      canonical,
+    },
     openGraph: {
+      ...defaultMetadata.openGraph,
       images: [
         {
           url:
@@ -48,6 +54,7 @@ export async function generateMetadata({
           alt: "Efedra Center",
         },
       ],
+      url: canonical,
     },
   };
 }
