@@ -14,15 +14,21 @@ export default async function WebPageSchema({
   // Отримуємо метадані для поточного шляху
   const metadata = await getDefaultMetadata(locale, path);
 
-  const title =
-    typeof metadata.title === "string"
-      ? metadata.title
-      : metadata.title?.absolute || "";
+  // Отримуємо title - може бути string або об'єкт
+  let title = "";
+  if (typeof metadata.title === "string") {
+    title = metadata.title;
+  } else if (metadata.title && typeof metadata.title === "object") {
+    title = (metadata.title as { absolute?: string; default?: string; template?: string })
+      .absolute ||
+      (metadata.title as { absolute?: string; default?: string; template?: string })
+        .default ||
+      "";
+  }
 
+  // Отримуємо description - може бути string або undefined
   const description =
-    typeof metadata.description === "string"
-      ? metadata.description
-      : metadata.description || "";
+    typeof metadata.description === "string" ? metadata.description : "";
 
   const url = getCanonicalUrl(locale, path);
 
