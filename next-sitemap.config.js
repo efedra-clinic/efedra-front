@@ -53,13 +53,16 @@ const sitemapConfig = {
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [
-      { userAgent: "*", allow: "/" },
-      { userAgent: "*", disallow: "/api/*" },
+      {
+        userAgent: "*",
+        allow: ["/", "/_next/static"],
+        disallow: ["/api/", "/_next/image"],
+      },
     ],
   },
   transform: async (config, path, locale = "uk") => {
     const base = config.siteUrl;
-    
+
     // Для uk (дефолтна локаль) - без префіксу, для ru - з префіксом
     // Особливий випадок для кореневого шляху "/"
     let localizedPath;
@@ -68,9 +71,9 @@ const sitemapConfig = {
     } else {
       localizedPath = path === "/" ? "/ru" : `/ru${path}`;
     }
-    
+
     const fullUrl = `${base}${localizedPath}`;
-    
+
     // Формуємо альтернативні посилання
     const ukPath = path === "/" ? "/" : path;
     const ruPath = path === "/" ? "/ru" : `/ru${path}`;

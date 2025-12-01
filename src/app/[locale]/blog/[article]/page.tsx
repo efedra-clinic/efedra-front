@@ -13,6 +13,7 @@ import { Post } from "@/types/post";
 import { getDefaultMetadata } from "@/utils/getDefaultMetadata";
 import { urlFor } from "@/utils/getUrlForSanityImage";
 import { getLocalizedContent, deepLocalize } from "@/utils/getLocalizedContent";
+import { pageMetadata } from "@/utils/pageMetadata";
 
 interface ArticlePageProps {
   params: Promise<{ article: string; locale: string }>;
@@ -22,6 +23,10 @@ export async function generateMetadata({
   params,
 }: ArticlePageProps): Promise<Metadata> {
   const { article, locale } = await params;
+
+  const path = `/blog/${article}`;
+  const customMetadata = pageMetadata[path];
+  const localeKey = locale === "uk" ? "uk" : "ru";
 
   const currentPost = await fetchSanityDataServer(postBySlugQuery, {
     slug: article,
@@ -33,19 +38,43 @@ export async function generateMetadata({
     locale
   );
 
-  const defaultMetadata = await getDefaultMetadata(locale, `/blog/${article}`);
+  const defaultMetadata = await getDefaultMetadata(locale, path);
 
   const canonical = 
     typeof defaultMetadata.alternates?.canonical === "string"
       ? defaultMetadata.alternates.canonical
       : undefined;
 
+  // Use custom metadata if available, otherwise use Sanity data, otherwise use default
+  const title = customMetadata
+    ? customMetadata[localeKey]?.title
+    : localizedTitle || defaultMetadata.title;
+  const description = customMetadata
+    ? customMetadata[localeKey]?.description
+    : localizedDescription || defaultMetadata.description;
+
+  // Ensure title and description are strings or undefined (not null) for TypeScript
+  const titleString: string | undefined =
+    (title ?? null) !== null && typeof title === "string"
+      ? title
+      : typeof defaultMetadata.title === "string"
+      ? defaultMetadata.title
+      : undefined;
+  const descriptionString: string | undefined =
+    (description ?? null) !== null && typeof description === "string"
+      ? description
+      : typeof defaultMetadata.description === "string"
+      ? defaultMetadata.description
+      : undefined;
+
   return {
-    title: localizedTitle || defaultMetadata.title,
-    description: localizedDescription || defaultMetadata.description,
+    title: titleString,
+    description: descriptionString,
     alternates: defaultMetadata.alternates,
     openGraph: {
       ...defaultMetadata.openGraph,
+      title: titleString,
+      description: descriptionString,
       images: [
         {
           url:
