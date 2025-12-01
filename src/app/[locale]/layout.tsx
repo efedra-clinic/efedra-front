@@ -9,6 +9,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import WebPageSchema from "@/components/shared/seo/WebPageSchema";
+import LocalBusinessSchema from "@/components/shared/seo/LocalBusinessSchema";
 
 const Footer = dynamic(() => import("@/components/shared/footer/Footer"), {
   ssr: true,
@@ -54,11 +55,12 @@ export default async function LocaleLayout({
           name="google-site-verification"
           content="tatXFYugHOmQUUTbHIzUPHL4Wu8J0THGaI5bQ7HCvjo"
         />
+        <LocalBusinessSchema />
+        <WebPageSchema />
       </head>
       <body
         className={`${montserrat.variable} ${evolenta.variable} flex min-h-dvh flex-col antialiased text-[14px] font-normal leading-[120%]`}
       >
-        <WebPageSchema />
         <NextIntlClientProvider>
           <SplashGate>
             <Header />
