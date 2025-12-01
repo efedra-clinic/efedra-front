@@ -1,69 +1,47 @@
-"use client";
+import Script from "next/script";
+import { getDefaultMetadata } from "@/utils/getDefaultMetadata";
+import { getCanonicalUrl } from "@/utils/getCanonicalUrl";
 
-import { useEffect } from "react";
+interface WebPageSchemaProps {
+  locale: string;
+  path: string;
+}
 
-export default function WebPageSchema() {
-  useEffect(() => {
-    const updateSchema = () => {
-      // Отримуємо title та description з мета-тегів
-      const titleTag = document.querySelector('title');
-      const metaDescription = document.querySelector('meta[name="description"]');
-      const canonicalLink = document.querySelector('link[rel="canonical"]');
+export default async function WebPageSchema({
+  locale,
+  path,
+}: WebPageSchemaProps) {
+  // Отримуємо метадані для поточного шляху
+  const metadata = await getDefaultMetadata(locale, path);
 
-      const title = titleTag?.textContent || "";
-      const description = metaDescription?.getAttribute("content") || "";
-      const url = canonicalLink?.getAttribute("href") || window.location.href;
+  const title =
+    typeof metadata.title === "string"
+      ? metadata.title
+      : metadata.title?.absolute || "";
 
-      // Створюємо або оновлюємо JSON-LD скрипт
-      let scriptElement = document.getElementById("webpage-schema") as HTMLScriptElement;
-      
-      if (!scriptElement) {
-        scriptElement = document.createElement("script");
-        scriptElement.id = "webpage-schema";
-        scriptElement.type = "application/ld+json";
-        document.head.appendChild(scriptElement);
-      }
+  const description =
+    typeof metadata.description === "string"
+      ? metadata.description
+      : metadata.description || "";
 
-      const schema = {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        name: title,
-        description: description,
-        url: url,
-      };
+  const url = getCanonicalUrl(locale, path);
 
-      scriptElement.textContent = JSON.stringify(schema);
-    };
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description: description,
+    url: url,
+  };
 
-    // Оновлюємо схему при монтуванні
-    updateSchema();
-
-    // Оновлюємо схему при зміні URL (для клієнтської навігації)
-    const observer = new MutationObserver(updateSchema);
-    observer.observe(document.head, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ["content", "href"],
-    });
-
-    // Також слухаємо зміни title
-    const titleObserver = new MutationObserver(updateSchema);
-    const titleElement = document.querySelector('title');
-    if (titleElement) {
-      titleObserver.observe(titleElement, {
-        childList: true,
-        characterData: true,
-        subtree: true,
-      });
-    }
-
-    return () => {
-      observer.disconnect();
-      titleObserver.disconnect();
-    };
-  }, []);
-
-  return null;
+  return (
+    <Script
+      id="webpage-schema"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(schema),
+      }}
+    />
+  );
 }
 

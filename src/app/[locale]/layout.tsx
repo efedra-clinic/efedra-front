@@ -10,6 +10,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import WebPageSchema from "@/components/shared/seo/WebPageSchema";
 import LocalBusinessSchema from "@/components/shared/seo/LocalBusinessSchema";
+import { headers } from "next/headers";
 
 const Footer = dynamic(() => import("@/components/shared/footer/Footer"), {
   ssr: true,
@@ -33,7 +34,20 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  return await getDefaultMetadata(locale, "/");
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") || "/";
+
+  // Витягуємо шлях без локалі
+  let path = pathname;
+  if (path.startsWith(`/${locale}`)) {
+    path = path.replace(`/${locale}`, "") || "/";
+  } else if (path.startsWith("/ru")) {
+    path = path.replace("/ru", "") || "/";
+  } else if (path.startsWith("/uk")) {
+    path = path.replace("/uk", "") || "/";
+  }
+
+  return await getDefaultMetadata(locale, path);
 }
 
 export default async function LocaleLayout({
@@ -48,6 +62,20 @@ export default async function LocaleLayout({
     notFound();
   }
 
+  // Отримуємо метадані для WebPageSchema
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") || "/";
+
+  // Витягуємо шлях без локалі
+  let path = pathname;
+  if (path.startsWith(`/${locale}`)) {
+    path = path.replace(`/${locale}`, "") || "/";
+  } else if (path.startsWith("/ru")) {
+    path = path.replace("/ru", "") || "/";
+  } else if (path.startsWith("/uk")) {
+    path = path.replace("/uk", "") || "/";
+  }
+
   return (
     <html lang={locale}>
       <head>
@@ -56,7 +84,7 @@ export default async function LocaleLayout({
           content="tatXFYugHOmQUUTbHIzUPHL4Wu8J0THGaI5bQ7HCvjo"
         />
         <LocalBusinessSchema />
-        <WebPageSchema />
+        <WebPageSchema locale={locale} path={path} />
       </head>
       <body
         className={`${montserrat.variable} ${evolenta.variable} flex min-h-dvh flex-col antialiased text-[14px] font-normal leading-[120%]`}
