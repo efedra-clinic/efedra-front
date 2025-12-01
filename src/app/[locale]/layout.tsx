@@ -8,6 +8,7 @@ import SplashGate from "@/components/shared/splashScreen/SplashGate";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import WebPageSchema from "@/components/shared/seo/WebPageSchema";
 
 const Footer = dynamic(() => import("@/components/shared/footer/Footer"), {
   ssr: true,
@@ -57,6 +58,7 @@ export default async function LocaleLayout({
       <body
         className={`${montserrat.variable} ${evolenta.variable} flex min-h-dvh flex-col antialiased text-[14px] font-normal leading-[120%]`}
       >
+        <WebPageSchema />
         <NextIntlClientProvider>
           <SplashGate>
             <Header />
