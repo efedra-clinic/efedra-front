@@ -53,14 +53,28 @@ export async function generateMetadata({
     ? customMetadata[localeKey]?.description
     : localizedDescription || defaultMetadata.description;
 
+  // Ensure title and description are strings or undefined (not null) for TypeScript
+  const titleString: string | undefined =
+    (title ?? null) !== null && typeof title === "string"
+      ? title
+      : typeof defaultMetadata.title === "string"
+      ? defaultMetadata.title
+      : undefined;
+  const descriptionString: string | undefined =
+    (description ?? null) !== null && typeof description === "string"
+      ? description
+      : typeof defaultMetadata.description === "string"
+      ? defaultMetadata.description
+      : undefined;
+
   return {
-    title,
-    description,
+    title: titleString,
+    description: descriptionString,
     alternates: defaultMetadata.alternates,
     openGraph: {
       ...defaultMetadata.openGraph,
-      title,
-      description,
+      title: titleString,
+      description: descriptionString,
       images: [
         {
           url:
