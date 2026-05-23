@@ -8,6 +8,11 @@ import { useCallBackValidation } from "@/schemas/callBackValidation";
 import CustomizedInput from "../formComponents/CustomizedInput";
 import MainButton from "../buttons/MainButton";
 import { useTranslations } from "next-intl";
+import {
+  describeSource,
+  getLanding,
+  getPathHistory,
+} from "@/utils/leadTracking";
 
 export interface ValuesCallBackFormType {
   name: string;
@@ -44,10 +49,48 @@ export default function CallBackForm({
     formikHelpers: FormikHelpers<ValuesCallBackFormType>
   ) => {
     const { resetForm } = formikHelpers;
-    const data =
-      `<b>Заявка "Форма зворотнього зв'язку"</b>\n` +
-      `<b>Ім'я:</b> ${values.name.trim()}\n` +
-      `<b>Телефон:</b> ${values.phone.trim().replace(/(?!^)\D/g, "")}\n`;
+
+    const landing = getLanding();
+    const source = describeSource(landing);
+    const history = getPathHistory();
+    const currentPath =
+      typeof window !== "undefined" ? window.location.pathname : "";
+
+    const escapeHtml = (s: string) =>
+      s
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+    const lines: string[] = [
+      `<b>Заявка "Форма зворотнього зв'язку"</b>`,
+      `<b>Ім'я:</b> ${escapeHtml(values.name.trim())}`,
+      `<b>Телефон:</b> ${values.phone.trim().replace(/(?!^)\D/g, "")}`,
+      `<b>Джерело:</b> ${escapeHtml(source)}`,
+      `<b>Поточна сторінка:</b> ${escapeHtml(currentPath)}`,
+    ];
+
+    if (landing.landingUrl) {
+      lines.push(`<b>Перша сторінка:</b> ${escapeHtml(landing.landingUrl)}`);
+    }
+    if (landing.referrer) {
+      lines.push(`<b>Реферер:</b> ${escapeHtml(landing.referrer)}`);
+    }
+    const utmParts = [
+      landing.utm_source && `source=${landing.utm_source}`,
+      landing.utm_medium && `medium=${landing.utm_medium}`,
+      landing.utm_campaign && `campaign=${landing.utm_campaign}`,
+      landing.utm_content && `content=${landing.utm_content}`,
+      landing.utm_term && `term=${landing.utm_term}`,
+    ].filter(Boolean);
+    if (utmParts.length) {
+      lines.push(`<b>UTM:</b> ${escapeHtml(utmParts.join(", "))}`);
+    }
+    if (history.length > 1) {
+      lines.push(`<b>Шлях:</b> ${escapeHtml(history.join(" → "))}`);
+    }
+
+    const data = lines.join("\n") + "\n";
     try {
       setIsError(false);
       setIsLoading(true);

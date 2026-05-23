@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import Header from "@/components/shared/header/Header";
 import dynamic from "next/dynamic";
 import SplashGate from "@/components/shared/splashScreen/SplashGate";
+import LeadTracker from "@/components/shared/LeadTracker";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
@@ -124,6 +125,7 @@ fbq('track', 'PageView');`}
       >
         <NextIntlClientProvider>
           <SplashGate skipSplash={skipSplash}>
+            <LeadTracker />
             <Header />
             <main className="flex-1 pt-[86px] lg:pt-[99px]">{children}</main>
             <Footer />
