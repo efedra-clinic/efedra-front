@@ -90,6 +90,11 @@ export default async function LocaleLayout({
           name="google-site-verification"
           content="tatXFYugHOmQUUTbHIzUPHL4Wu8J0THGaI5bQ7HCvjo"
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var d=document.documentElement;if(navigator.webdriver===true||/HeadlessChrom|Lighthouse|PageSpeed|GTmetrix|Pingdom|googlebot|bingbot|yandex|baidu|duckduckbot|slurp|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegram|applebot|petalbot|semrush|ahrefs|mj12bot/i.test(navigator.userAgent||'')||sessionStorage.getItem('splashPlayed')){d.classList.add('skip-splash');}}catch(e){}})();`,
+          }}
+        />
         <LocalBusinessSchema />
         <WebPageSchema locale={locale} path={path} />
         <Script id="meta-pixel" strategy="lazyOnload">

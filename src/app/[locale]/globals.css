@@ -25,6 +25,11 @@
     scrollbar-gutter: stable;
   }
 
+  .skip-splash .splash-overlay,
+  .skip-splash .lottie-splash {
+    display: none !important;
+  }
+
   html,
   body {
     max-width: 100vw;

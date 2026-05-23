@@ -22,7 +22,7 @@ export default function LottieSplashScreen({
             transition: { duration: 1, ease: "easeInOut" },
           }}
           transition={{ duration: 1 }}
-          className="no-doc-scroll fixed inset-0 z-50 flex items-center justify-center bg-beige"
+          className="lottie-splash no-doc-scroll fixed inset-0 z-50 flex items-center justify-center bg-beige"
         >
           <Lottie
             animationData={animationData}

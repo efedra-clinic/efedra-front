@@ -50,12 +50,14 @@ export default function SplashGate({ children, skipSplash }: SplashGateProps) {
   return (
     <>
       {!skipSplash && splashVisible && (
-        <div
-          aria-hidden
-          className="no-doc-scroll fixed inset-0 z-50 bg-beige pointer-events-none"
-        />
+        <>
+          <div
+            aria-hidden
+            className="splash-overlay no-doc-scroll fixed inset-0 z-50 bg-beige pointer-events-none"
+          />
+          <LottieSplashScreen visible={splashVisible} />
+        </>
       )}
-      <LottieSplashScreen visible={splashVisible && !skipSplash} />
       {children}
     </>
   );
