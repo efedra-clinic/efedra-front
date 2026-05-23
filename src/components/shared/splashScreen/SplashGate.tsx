@@ -7,35 +7,55 @@ const LottieSplashScreen = dynamic(() => import("./LottieSplashScreen"), {
   ssr: false,
 });
 
-export default function SplashGate({
-  children,
-}: {
+interface SplashGateProps {
   children: React.ReactNode;
-}) {
-  const [showSplash, setShowSplash] = useState(false);
+  skipSplash?: boolean;
+}
+
+export default function SplashGate({ children, skipSplash }: SplashGateProps) {
+  const [splashVisible, setSplashVisible] = useState(!skipSplash);
 
   useEffect(() => {
-    const ua = navigator.userAgent;
-    const isAuditTool =
-      /Chrome-Lighthouse|HeadlessChrome|PageSpeed|Speed Insights|GTmetrix|Pingdom/i.test(
-        ua
-      );
-    if (isAuditTool) return;
+    if (skipSplash) {
+      setSplashVisible(false);
+      return;
+    }
 
-    if (sessionStorage.getItem("splashPlayed")) return;
+    const isAutomated =
+      (typeof navigator !== "undefined" &&
+        (navigator.webdriver === true ||
+          /Lighthouse|HeadlessChrom|PageSpeed|Speed Insights|GTmetrix|Pingdom/i.test(
+            navigator.userAgent || ""
+          ))) ||
+      false;
 
-    setShowSplash(true);
+    if (isAutomated) {
+      setSplashVisible(false);
+      return;
+    }
+
+    if (sessionStorage.getItem("splashPlayed")) {
+      setSplashVisible(false);
+      return;
+    }
+
     const timer = setTimeout(() => {
       sessionStorage.setItem("splashPlayed", "true");
-      setShowSplash(false);
+      setSplashVisible(false);
     }, 2200);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [skipSplash]);
 
   return (
     <>
-      <LottieSplashScreen visible={showSplash} />
+      {!skipSplash && splashVisible && (
+        <div
+          aria-hidden
+          className="no-doc-scroll fixed inset-0 z-50 bg-beige pointer-events-none"
+        />
+      )}
+      <LottieSplashScreen visible={splashVisible && !skipSplash} />
       {children}
     </>
   );

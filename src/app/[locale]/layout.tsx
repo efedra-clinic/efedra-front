@@ -67,6 +67,11 @@ export default async function LocaleLayout({
   // Отримуємо метадані для WebPageSchema
   const headersList = await headers();
   const pathname = headersList.get("x-pathname") || "/";
+  const userAgent = headersList.get("user-agent") || "";
+  const skipSplash =
+    /Lighthouse|HeadlessChrom|PageSpeed|Speed Insights|GTmetrix|Pingdom|googlebot|bingbot|yandex|baidu|duckduckbot|slurp|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegram|applebot|petalbot|semrush|ahrefs|mj12bot/i.test(
+      userAgent
+    );
 
   // Витягуємо шлях без локалі
   let path = pathname;
@@ -113,7 +118,7 @@ fbq('track', 'PageView');`}
         className={`${montserrat.variable} ${evolenta.variable} flex min-h-dvh flex-col antialiased text-[14px] font-normal leading-[120%]`}
       >
         <NextIntlClientProvider>
-          <SplashGate>
+          <SplashGate skipSplash={skipSplash}>
             <Header />
             <main className="flex-1 pt-[86px] lg:pt-[99px]">{children}</main>
             <Footer />

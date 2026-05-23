@@ -1,7 +1,5 @@
 "use client";
 import Marquee from "react-fast-marquee";
-import * as motion from "motion/react-client";
-import { headerVariants } from "@/utils/animationVariants";
 import clsx from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -15,14 +13,7 @@ export default function MarqueeLine({
   variant = "beige",
 }: MarqueeLineProps) {
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      exit="exit"
-      viewport={{ once: true, amount: 0.2 }}
-      variants={headerVariants}
-      className={className}
-    >
+    <div className={className}>
       <Marquee
         autoFill={true}
         speed={70}
@@ -41,6 +32,6 @@ export default function MarqueeLine({
         <span className="inline-block mx-[7.15px] lg:mx-[13px]">efedra</span>
         <span className="inline-block mx-[7.15px] lg:mx-[13px]">efedra</span>
       </Marquee>
-    </motion.div>
+    </div>
   );
 }
