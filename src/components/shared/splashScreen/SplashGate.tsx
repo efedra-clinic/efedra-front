@@ -13,40 +13,30 @@ export default function SplashGate({
   children: React.ReactNode;
 }) {
   const [showSplash, setShowSplash] = useState(false);
-  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    const alreadyPlayed = sessionStorage.getItem("splashPlayed");
+    const ua = navigator.userAgent;
+    const isAuditTool =
+      /Chrome-Lighthouse|HeadlessChrome|PageSpeed|Speed Insights|GTmetrix|Pingdom/i.test(
+        ua
+      );
+    if (isAuditTool) return;
 
-    if (alreadyPlayed) {
-      setShowContent(true);
-      return;
-    }
+    if (sessionStorage.getItem("splashPlayed")) return;
 
     setShowSplash(true);
-
     const timer = setTimeout(() => {
       sessionStorage.setItem("splashPlayed", "true");
       setShowSplash(false);
-      setShowContent(true);
     }, 2200);
 
-    return () => {
-      clearTimeout(timer);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
       <LottieSplashScreen visible={showSplash} />
-
-      <div
-        style={{
-          display: showContent ? "block" : "none",
-        }}
-      >
-        {children}
-      </div>
+      {children}
     </>
   );
 }

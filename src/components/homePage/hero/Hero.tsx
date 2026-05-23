@@ -29,7 +29,6 @@ export default function Hero() {
             alt="background"
             priority
             fetchPriority="high"
-            unoptimized
             sizes="(min-width: 1024px) 0px, 100vw"
             width={1063}
             height={868}
@@ -51,10 +50,7 @@ export default function Hero() {
           <Image
             src="/images/homePage/hero/bgDesk.webp"
             alt="background"
-            priority
-            fetchPriority="high"
-            unoptimized
-            sizes="(max-width: 1023px) 100vw, 0px"
+            sizes="(max-width: 1023px) 0px, 100vw"
             width={2295}
             height={1093}
             className="object-cover"

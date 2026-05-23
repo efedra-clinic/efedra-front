@@ -24,9 +24,10 @@ const montserrat = Montserrat({
 });
 
 const evolenta = localFont({
-  src: "../../fonts/evolenta-regular.ttf",
+  src: "../../fonts/evolenta-regular.woff2",
   variable: "--font-evolenta",
   display: "swap",
+  preload: true,
 });
 
 export async function generateMetadata({
@@ -86,7 +87,7 @@ export default async function LocaleLayout({
         />
         <LocalBusinessSchema />
         <WebPageSchema locale={locale} path={path} />
-        <Script id="meta-pixel" strategy="afterInteractive">
+        <Script id="meta-pixel" strategy="lazyOnload">
           {`!function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
